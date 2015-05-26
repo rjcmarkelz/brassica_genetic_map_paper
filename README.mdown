@@ -1,8 +1,12 @@
 #Brassica rapa Genetic Map v2.1
 
-If you find a mistake or reorganize the map please email Cody Markelz (markelz@gmail.com) so I can update the version control repository.
+## Quickstart
+Download map: output/Brassica_F8_v2.1_gen.csv
 
-This is a new version of the genetic map described below. This map is constructed from a total of 1527 markers from Mike Covington. These SNPs were called from RNA-seq data that was mapped to the Brassica rapa Chiffu Genome Version 1.5. 
+## Details
+If you find a mistake or reorganize the map please issue a pull request. We are in the process of migrating all the files to open. Please be patient as some of them are tied to other publications. The newest
+
+This is a new version of the genetic map described below. This map is constructed from a total of 1527 markers from Mike Covington. These SNPs were called from RNA-seq data that was mapped to the Brassica rapa Chiffu Genome Version 1.5. Details to follow.
 
 The workflow to reproduce this map:
 The input file from Mike is *bin-genotypes_ref1.5_v0.1.1.txt* in the Input directory.
@@ -24,7 +28,7 @@ In Output directory.
 This is the genetic map output file in RQTL format from the analysis with HETs removed as required by RQTL.
 
 ## Brassica_F8_v2.1_gen
-The same as previous file, but named to be consistant with v1.0 of the map.
+The same as previous file, but named to be consistant with v1.0 of the map. 
 
 
 
