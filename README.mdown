@@ -1,0 +1,85 @@
+#Brassica rapa Genetic Map v2.1
+
+If you find a mistake or reorganize the map please email Cody Markelz (markelz@gmail.com) so I can update the version control repository.
+
+This is a new version of the genetic map described below. This map is constructed from a total of 1527 markers from Mike Covington. These SNPs were called from RNA-seq data that was mapped to the Brassica rapa Chiffu Genome Version 1.5. 
+
+The workflow to reproduce this map:
+The input file from Mike is *bin-genotypes_ref1.5_v0.1.1.txt* in the Input directory.
+I added tabs to make the file easier to parse *bin-genotypes_ref1.5_v0.1.1_tab.txt* also in the Input directory.
+
+## SNP_Map_Converstion_ref1_5.R 
+Conversion of the genotype file into RQTL format takes *bin-genotypes_ref1.5_v0.1.1_tab.txt* as input. This is found in the Scripts directory.
+
+## SNP_map_construction_ref1_5.R
+Interactive R commands to reproduce the map. Please note that many steps rely on *ripple* which has a random number component to it and may require a few calls to orderMarkers() for things to look nice. This is found in the Scripts directory.
+
+## Plots for each step of the map construction
+In the Output directory is a series of increasing numbered plots for each of the major steps.
+
+## R workspace: genetic_map_ref1_5_8_final_workspace
+In Output directory.
+
+## snp_map_rqtl_Mbp_ref1.5.1_cross_output_gen.csv
+This is the genetic map output file in RQTL format from the analysis with HETs removed as required by RQTL.
+
+## Brassica_F8_v2.1_gen
+The same as previous file, but named to be consistant with v1.0 of the map.
+
+
+
+
+#This is documentation for v1.0 of the map
+##Brassica rapa Genetic Map v1.0- Brassica_F8_v1.0_gen.csv
+This file contains notes for how Marc Brock and Cody Markelz independently made a Brassica rapa genetic map for the IRRI population using SNPs derived from RNA-seq data. 
+
+##A total of 1365 markers from Mike Covington originally.
+   This raw data can be found in the INPUT directory. bin-genotype.2013-08-12.csv
+
+##Marc's Summary of his method:
+1.  With SNP markers identified by Mike Covington from his mapping of the R500xIMB211 F8 population to the current reference B. rapa genome, I utilized RQTL to confirm that markers mapped to the correct linkage group.  Recombination fraction/LOD support indicated that several markers belonged to different linkage groups.  Additionally, RQTL identified several duplicate markers. 
+
+2.  Duplicates dropped and nine markers were reassigned to different linkage groups.
+
+3.  Following this, RQTL detected 13 linkage groups at max.rf=0.35 and min.lod=6).
+
+4.  I dropped LOD support until LGs 12 & 13 grouped with other makers.  Both LGs grouped with chromosomes originally assigned via Mike's mapping w/ the reference. However, LG11 was difficult to assign cleanly, because the LOD score had to be reduced so much that several chromosomes collapsed into a LG 
+(one of which was A02 where markers in LG11 were originally assigned).
+
+5.  We decided to leave LG11 grouped with the other markers of A02 to which it was originally assigned.
+
+6.  Onemap was used to estimate the genetic map.  Markers were reordered with the following settings:  RIL population with a kosambi mapping function.  7 most informative markers used in the compare step.  A two point "rcd" algorithm with a LOD of 3 followed by second "touchdown" placement at LOD=2 for markers that did not initially map.  Markers that failed to map at LOD=2 were dropped and the map was reestimated for the final map using the settings describe above.
+
+##Cody's Summary of his method:
+There are a few main R files and general descriptions of each, see files for comments on each step found in the Scripts directory:
+
+1) SNP_Map_Conversion_copy.r - format all raw genotype data for RQTL or Onemap, and convert between data formats
+
+2) SNP_map_construction_full.r - initial discovery of strange markers
+
+3) SNP_map_construction_reduced.r - reduced map to do fine adjustments
+
+4) cody_marc_map_compare.r - comparison analysis between maps, estimating map functions and map visualizations. Kosambi map function does better than haldane. The final map was created from this file and outputted to an RQTL format map. AA = R500 and BB = IMB211. Also the R code to give Mike a list of common and dropped markers between the two datasets. Version 1.0 map is Brassica_F8_v1.0_gen.csv found in OUTPUT directory.
+
+5) cody_fede_marc_map_merge.r - attempts (failed) to merge F5 map (fede) with ours. If you can improve on this I would be grateful. Too many Hets in the F5 map, too few individuals for the RNA-seq SNPs (124), compared to 163 originally in F5 map. Tried to also move in markers from Marc's map and merge it with mine (1302 markers). 
+
+###Additional Notes: 
+Because the data used to call the SNPs is from RNAseq data, there are marker gaps where there are fewer (if any), genes expressed. The line up with centromeric (or ancient centromeric) regions on each of the chromosomes. See Mike's RILS_ALL_SNPS.png RIL_composite.png, the Brassica_F8_v1.0.pdf map, and Figure 2B from Chang et al. 2013. for visualizations (in OUTPUT directory). Also notice that the segregation distortion at the end of Chromosome 3 is likely caused by a Centromere located all the way at the bottom of the chromosome.
+
+RIL_290 and RIL_357 were not genotyped originally in during the F5 generation. These RIL numbers are also found as far back as Jenny Dechaine's field data from 2007.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
