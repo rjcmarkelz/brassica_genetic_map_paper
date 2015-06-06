@@ -1,4 +1,6 @@
 
+Infile the genetic map with some dummy traits. It will be in Mbp, so should look normal, until you use the 'r est.map()' function.
+
 ```{r  warning=FALSE, eval = TRUE} 
 library(qtl)
 setwd("/Users/Cody_2/git.repos/brassica_genetic_map/input")
