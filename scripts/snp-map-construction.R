@@ -1,3 +1,7 @@
+# Following Karl Broman's Guide Here: LINK
+
+
+
 ###
 ### Create genetic map
 ###
@@ -385,12 +389,13 @@ chr8 <- markernames(b_map_red, chr='A08')
 chr8 # reverse marker order
 
 chr9 <- markernames(b_map_red, chr='A09')
-chr9 # okay
+chr9 # reorder within, or potential inversion?
+# 37 - 52
 
 chr10 <- markernames(b_map_red, chr='A10')
-chr10 # reverse marker order, potential inversion
+chr10 # reverse marker order, potential inversion?
 
-
+# reorder if necessary
 chr1 <- markernames(b_map_red, chr='A01')
 chr1 <- rev(chr1)
 chr1
@@ -420,6 +425,20 @@ markernames(b_map_red, chr='A08')
 
 plotMap(b_map_red, chr='A08') 
 plot.rf(b_map_red, chr='A08')
+
+
+chr9 <- markernames(b_map_red, chr='A09')
+chr9 
+chr9[37:52] <- rev(chr9[37:52])
+chr9
+
+b_map_red <- switch.order(b_map_red, chr = "A09", order = chr9)
+markernames(b_map_red, chr='A09')
+
+plotMap(b_map_red, chr='A09') 
+plot.rf(b_map_red, chr='A09')
+b_map_red <- est.rf(b_map_red)
+
 
 chr10 <- markernames(b_map_red, chr='A10')
 chr10 <- rev(chr10)

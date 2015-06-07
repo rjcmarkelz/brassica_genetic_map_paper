@@ -142,7 +142,6 @@ newplot_flr <- newplot_flr +  theme_bw() + scale_y_continuous(limits=c(0, 13)) +
 newplot_flr
 
 
-
 setwd("/Users/Cody_2/git.repos/brassica_genetic_map_paper/output")
 figure_X <- plot_grid(old_map_plot, new_map_plot, oldplot_flr, newplot_flr, labels=c("A", "B", "D", "E"))
 ggsave("genetic_map_qtl_figure.pdf", figure_X)
@@ -153,55 +152,58 @@ draft
 ggsave("draft_figure.pdf", draft)
 
 
+
+
 #############
 #############
 # supplemental data
 #############
 #############
 
+###NOT RUN YET###### June 7, 2015
 
 #############
 #############
 # plot leaf length
 #############
 #############
-oldleaf <- scanone(brassica_traits, pheno.col = 1, method = "imp", chr = "A06")
-plot(oldleaf)
+# oldleaf <- scanone(brassica_traits, pheno.col = 1, method = "imp", chr = "A06")
+# plot(oldleaf)
 
-peak <- 7
-oldmapplotleaf <- ggplot(oldleaf)
-oldmapplotleaf <- oldmapplotleaf +  theme_bw() + scale_y_continuous(limits=c(0, 7.5)) + 
-                        geom_line(aes(x = pos, y = lod), size = 2) +
-                        geom_hline(yintercept = 2.44, color = "red", size = 1) +
-                        geom_segment(aes(x = pos, xend = pos), y = (peak * -0.02), yend = (peak * -0.05)) +
-                        theme(text = element_text(size = 20)) +
-                        xlab("Genetic Position (cM)") +
-                        ylab("LOD Score") 
-oldmapplotleaf
+# peak <- 7
+# oldmapplotleaf <- ggplot(oldleaf)
+# oldmapplotleaf <- oldmapplotleaf +  theme_bw() + scale_y_continuous(limits=c(0, 7.5)) + 
+#                         geom_line(aes(x = pos, y = lod), size = 2) +
+#                         geom_hline(yintercept = 2.44, color = "red", size = 1) +
+#                         geom_segment(aes(x = pos, xend = pos), y = (peak * -0.02), yend = (peak * -0.05)) +
+#                         theme(text = element_text(size = 20)) +
+#                         xlab("Genetic Position (cM)") +
+#                         ylab("LOD Score") 
+# oldmapplotleaf
 
-newmapplotleaf_perm <- scanone(brassica_newmap, pheno.col = 1, method = "imp") 
-summary(so.perm2)
-# so.perm295 <- summary(so.perm2)[1] #keep 95%
-# # LOD thresholds (1000 permutations)
-# #      lod
-# # 5%  3.23
-# # 10% 2.81
+# newmapplotleaf_perm <- scanone(brassica_newmap, pheno.col = 1, method = "imp") 
+# summary(so.perm2)
+# # so.perm295 <- summary(so.perm2)[1] #keep 95%
+# # # LOD thresholds (1000 permutations)
+# # #      lod
+# # # 5%  3.23
+# # # 10% 2.81
 
-newmapplotleaf <- scanone(brassica_newmap, pheno.col = 1, method = "imp", chr = "A06")
-plot(newmapplotleaf)
+# newmapplotleaf <- scanone(brassica_newmap, pheno.col = 1, method = "imp", chr = "A06")
+# plot(newmapplotleaf)
 
-peak2 <- 7
-newplot_map <- ggplot(newmapplotleaf)
-newplot_map <- newplot_map +  theme_bw() + scale_y_continuous(limits=c(0, 7.5)) + 
-                        geom_line(aes(x = pos, y = lod), size = 2) +
-                        geom_hline(yintercept = 3.08, color = "red", size = 1) +
-                        geom_segment(aes(x = pos, xend = pos), y = (peak * -0.02), yend = (peak * -0.05)) +
-                        theme(text = element_text(size = 20)) +
-                        xlab("Genetic Distance (cM)") +
-                        ylab("LOD Score") 
-newplot_map
+# peak2 <- 7
+# newplot_map <- ggplot(newmapplotleaf)
+# newplot_map <- newplot_map +  theme_bw() + scale_y_continuous(limits=c(0, 7.5)) + 
+#                         geom_line(aes(x = pos, y = lod), size = 2) +
+#                         geom_hline(yintercept = 3.08, color = "red", size = 1) +
+#                         geom_segment(aes(x = pos, xend = pos), y = (peak * -0.02), yend = (peak * -0.05)) +
+#                         theme(text = element_text(size = 20)) +
+#                         xlab("Genetic Distance (cM)") +
+#                         ylab("LOD Score") 
+# newplot_map
 
-?scanone
+# ?scanone
 
 
 

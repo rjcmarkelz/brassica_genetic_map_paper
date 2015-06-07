@@ -1,250 +1,266 @@
-hotspot <- hotspotFinder(eqtltype, 10)
-eqtltype
-eqtltype <- eqtlClassifier(eqtl, snppos, genepos,1000000)
-head(eqtltype)
-?eqtlMcmc
-cutoff
-dim(eqtl)
-?eqtlMcmc
-str(PPA)
-head(PPA)
-str(gene)
-dim(PPA)
-head(eqtl)[1:10]
-dim(eqtl)
-head(eqtl)
-unique(eqtl$Gene)
-dim(eqtl)
-write.table(goldStandardMatrix, "final_exam_gene_network.csv", sep = ",")
-load('~/git.repos/teaching/data/final_network.RData')
-ls
-ls()
-library(igraph)
-cities_graph2 <- graph.adjacency(final_network, mode = "undirected")
-library(DREAM4)
-data(dream4_100_01)
-expressionData <- assays(dream4_100_01)$simulated
-names(exptData(dream4_010_01))
-goldStandardMatrix <- exptData(dream4_100_01)$goldStandardAdjacencyMatrix
-expressionData
-cities_graph2 <- graph.adjacency(goldStandardMatrix, mode = "undirected")
-plot.igraph(cities_graph2)
-goldStandardMatrix <- exptData(dream4_100_01)$goldStandardAdjacencyMatrix
-str(goldStandardMatrix)
-final_network <- goldStandardMatrix
-save(final_network, file = "final_network.RData")
-library(ggplot2)
-library(plyr)
-library(qtl)
+newplot_map
+peak2 <- 7
+newplot_map <- ggplot(newmapplotleaf)
+newplot_map <- newplot_map +  theme_bw() + scale_y_continuous(limits=c(0, 7)) +
+geom_line(aes(x = pos, y = lod), size = 2) +
+geom_hline(yintercept = 3.08, color = "red", size = 1) +
+geom_segment(aes(x = pos, xend = pos), y = (peak * -0.02), yend = (peak * -0.05)) +
+theme(text = element_text(size = 20)) +
+# theme(legend.position = "none",
+#   axis.text.x = element_text(angle = 90),
+#   axis.line=element_line())
+#   # panel.margin = unit(0, "cm")) +
+# ggtitle("LOD Curves for QTLs") +
+xlab("Genetic Distance (cM)") +
+ylab("LOD Score")
+newplot_map
+peak <- 7#
+oldmapplotleaf <- ggplot(oldleaf)#
+oldmapplotleaf <- oldmapplotleaf +  theme_bw() + scale_y_continuous(limits=c(0, 7)) + #
+                        geom_line(aes(x = pos, y = lod), size = 2) +#
+                        geom_hline(yintercept = 2.44, color = "red", size = 1) +#
+                        geom_segment(aes(x = pos, xend = pos), y = (peak * -0.02), yend = (peak * -0.05)) +#
+                        theme(text = element_text(size = 20)) +#
+                        # theme(legend.position = "none",#
+                        #   axis.text.x = element_text(angle = 90),#
+                        #   axis.line=element_line())#
+                        #   # panel.margin = unit(0, "cm")) +#
+                        # ggtitle("LOD Curves for QTLs") +#
+                        xlab("Genetic Position (cM)") +#
+                        ylab("LOD Score") #
+oldmapplotleaf
+peak <- 7
+oldmapplotleaf <- ggplot(oldleaf)
+oldmapplotleaf <- oldmapplotleaf +  theme_bw() + scale_y_continuous(limits=c(0, 8)) +
+geom_line(aes(x = pos, y = lod), size = 2) +
+geom_hline(yintercept = 2.44, color = "red", size = 1) +
+geom_segment(aes(x = pos, xend = pos), y = (peak * -0.02), yend = (peak * -0.05)) +
+theme(text = element_text(size = 20)) +
+# theme(legend.position = "none",
+#   axis.text.x = element_text(angle = 90),
+#   axis.line=element_line())
+#   # panel.margin = unit(0, "cm")) +
+# ggtitle("LOD Curves for QTLs") +
+xlab("Genetic Position (cM)") +
+ylab("LOD Score")
+oldmapplotleaf
+peak <- 7
+oldmapplotleaf <- ggplot(oldleaf)
+oldmapplotleaf <- oldmapplotleaf +  theme_bw() + scale_y_continuous(limits=c(0, 7.5)) +
+geom_line(aes(x = pos, y = lod), size = 2) +
+geom_hline(yintercept = 2.44, color = "red", size = 1) +
+geom_segment(aes(x = pos, xend = pos), y = (peak * -0.02), yend = (peak * -0.05)) +
+theme(text = element_text(size = 20)) +
+# theme(legend.position = "none",
+#   axis.text.x = element_text(angle = 90),
+#   axis.line=element_line())
+#   # panel.margin = unit(0, "cm")) +
+# ggtitle("LOD Curves for QTLs") +
+xlab("Genetic Position (cM)") +
+ylab("LOD Score")
+oldmapplotleaf
+peak2 <- 7
+newplot_map <- ggplot(newmapplotleaf)
+newplot_map <- newplot_map +  theme_bw() + scale_y_continuous(limits=c(0, 7.5)) +
+geom_line(aes(x = pos, y = lod), size = 2) +
+geom_hline(yintercept = 3.08, color = "red", size = 1) +
+geom_segment(aes(x = pos, xend = pos), y = (peak * -0.02), yend = (peak * -0.05)) +
+theme(text = element_text(size = 20)) +
+# theme(legend.position = "none",
+#   axis.text.x = element_text(angle = 90),
+#   axis.line=element_line())
+#   # panel.margin = unit(0, "cm")) +
+# ggtitle("LOD Curves for QTLs") +
+xlab("Genetic Distance (cM)") +
+ylab("LOD Score")
+newplot_map
+newmapplotflr <- scanone(brassica_newmap, pheno.col = 2, method = "imp", chr = "A06")
+plot(newmapplotflr)
+newmapplotflr <- scanone(brassica_newmap, pheno.col = 2, method = "imp", chr = "A10")
+plot(newmapplotflr)
+peak2 <- 9
+newplot_flr <- ggplot(newmapplotflr)
+newplot_flr <- newplot_flr +  theme_bw() + scale_y_continuous(limits=c(0, 9)) +
+geom_line(aes(x = pos, y = lod), size = 2) +
+geom_hline(yintercept = 3.08, color = "red", size = 1) +
+geom_segment(aes(x = pos, xend = pos), y = (peak * -0.02), yend = (peak * -0.05)) +
+theme(text = element_text(size = 20)) +
+# theme(legend.position = "none",
+#   axis.text.x = element_text(angle = 90),
+#   axis.line=element_line())
+#   # panel.margin = unit(0, "cm")) +
+# ggtitle("LOD Curves for QTLs") +
+xlab("Genetic Distance (cM)") +
+ylab("LOD Score")
+newplot_flr
+newplot_flr <- ggplot(newmapplotflr)
+newplot_flr <- newplot_flr +  theme_bw() + scale_y_continuous(limits=c(0, 9.5)) +
+geom_line(aes(x = pos, y = lod), size = 2) +
+geom_hline(yintercept = 3.08, color = "red", size = 1) +
+geom_segment(aes(x = pos, xend = pos), y = (peak * -0.02), yend = (peak * -0.05)) +
+theme(text = element_text(size = 20)) +
+# theme(legend.position = "none",
+#   axis.text.x = element_text(angle = 90),
+#   axis.line=element_line())
+#   # panel.margin = unit(0, "cm")) +
+# ggtitle("LOD Curves for QTLs") +
+xlab("Genetic Distance (cM)") +
+ylab("LOD Score")
+newplot_flr
+newplot_flr <- ggplot(newmapplotflr)
+newplot_flr <- newplot_flr +  theme_bw() + scale_y_continuous(limits=c(0, 10)) +
+geom_line(aes(x = pos, y = lod), size = 2) +
+geom_hline(yintercept = 3.08, color = "red", size = 1) +
+geom_segment(aes(x = pos, xend = pos), y = (peak * -0.02), yend = (peak * -0.05)) +
+theme(text = element_text(size = 20)) +
+# theme(legend.position = "none",
+#   axis.text.x = element_text(angle = 90),
+#   axis.line=element_line())
+#   # panel.margin = unit(0, "cm")) +
+# ggtitle("LOD Curves for QTLs") +
+xlab("Genetic Distance (cM)") +
+ylab("LOD Score")
+newplot_flr
+newplot_flr
+oldmapplotflr <- scanone(brassica_traits, pheno.col = 2, method = "imp", chr = "A10")
+plot(oldmapplotflr)
+peak2 <- 9
+oldplot_flr <- ggplot(oldmapplotflr)
+oldplot_flr <- oldplot_flr +  theme_bw() + scale_y_continuous(limits=c(0, 10)) +
+geom_line(aes(x = pos, y = lod), size = 2) +
+geom_hline(yintercept = 3.08, color = "red", size = 1) +
+geom_segment(aes(x = pos, xend = pos), y = (peak * -0.02), yend = (peak * -0.05)) +
+theme(text = element_text(size = 20)) +
+# theme(legend.position = "none",
+#   axis.text.x = element_text(angle = 90),
+#   axis.line=element_line())
+#   # panel.margin = unit(0, "cm")) +
+# ggtitle("LOD Curves for QTLs") +
+xlab("Genetic Distance (cM)") +
+ylab("LOD Score")
+oldplot_flr
+oldplot_flr <- ggplot(oldmapplotflr)
+oldplot_flr <- oldplot_flr +  theme_bw() + scale_y_continuous(limits=c(0, 12)) +
+geom_line(aes(x = pos, y = lod), size = 2) +
+geom_hline(yintercept = 3.08, color = "red", size = 1) +
+geom_segment(aes(x = pos, xend = pos), y = (peak * -0.02), yend = (peak * -0.05)) +
+theme(text = element_text(size = 20)) +
+# theme(legend.position = "none",
+#   axis.text.x = element_text(angle = 90),
+#   axis.line=element_line())
+#   # panel.margin = unit(0, "cm")) +
+# ggtitle("LOD Curves for QTLs") +
+xlab("Genetic Distance (cM)") +
+ylab("LOD Score")
+oldplot_flr
+oldplot_flr <- ggplot(oldmapplotflr)
+oldplot_flr <- oldplot_flr +  theme_bw() + scale_y_continuous(limits=c(0, 13)) +
+geom_line(aes(x = pos, y = lod), size = 2) +
+geom_hline(yintercept = 3.08, color = "red", size = 1) +
+geom_segment(aes(x = pos, xend = pos), y = (peak * -0.02), yend = (peak * -0.05)) +
+theme(text = element_text(size = 20)) +
+# theme(legend.position = "none",
+#   axis.text.x = element_text(angle = 90),
+#   axis.line=element_line())
+#   # panel.margin = unit(0, "cm")) +
+# ggtitle("LOD Curves for QTLs") +
+xlab("Genetic Distance (cM)") +
+ylab("LOD Score")
+oldplot_flr
+newplot_flr <- ggplot(newmapplotflr)
+newplot_flr <- newplot_flr +  theme_bw() + scale_y_continuous(limits=c(0, 13)) +
+geom_line(aes(x = pos, y = lod), size = 2) +
+geom_hline(yintercept = 3.08, color = "red", size = 1) +
+geom_segment(aes(x = pos, xend = pos), y = (peak * -0.02), yend = (peak * -0.05)) +
+theme(text = element_text(size = 20)) +
+# theme(legend.position = "none",
+#   axis.text.x = element_text(angle = 90),
+#   axis.line=element_line())
+#   # panel.margin = unit(0, "cm")) +
+# ggtitle("LOD Curves for QTLs") +
+xlab("Genetic Distance (cM)") +
+ylab("LOD Score")
+newplot_flr
+newmapplotflr_perm <- scanone(brassica_newmap, pheno.col = 2, method = "imp", perm = 1000)
+?scanone
+newmapplotflr_perm <- scanone(brassica_newmap, pheno.col = 2, method = "imp", n.perm = 1000)
+newmapplotflr_perm_95 <- summary(newmapplotflr_perm)[1] #keep 95%
+summary(newmapplotflr_perm)
+newmapplotflr_perm <- scanone(brassica_newmap, pheno.col = 2, method = "imp", n.perm = 10000)
+newmapplotflr_perm_95 <- summary(newmapplotflr_perm)[1] #keep 95%
+summary(newmapplotflr_perm)
+old_flr_perm <- scanone(brassica_traits, pheno.col = 2, method = "imp", n.perm = 10000)
+new_flr_perm <- newmapplotflr_perm
+new_flr_perm_95 <- summary(newmapplotflr_perm)[1] #keep 95%
+summary(newmapplotflr_perm)
+# LOD thresholds (10000 permutations)
+#      lod
+# 5%  2.89
+# 10% 2.56
+newmapplotflr <- scanone(brassica_newmap, pheno.col = 2, method = "imp", chr = "A10")
+plot(newmapplotflr)
+peak2 <- 9
+newplot_flr <- ggplot(newmapplotflr)
+newplot_flr <- newplot_flr +  theme_bw() + scale_y_continuous(limits=c(0, 13)) +
+geom_line(aes(x = pos, y = lod), size = 2) +
+geom_hline(yintercept = 2.89, color = "red", size = 1) +
+geom_segment(aes(x = pos, xend = pos), y = (peak * -0.02), yend = (peak * -0.05)) +
+theme(text = element_text(size = 20)) +
+xlab("Genetic Distance (cM)") +
+ylab("LOD Score")
+newplot_flr
+old_flr_perm_95 <- summary(old_flr_perm)[1] #keep 95%
+summary(old_flr_perm)
+oldmapplotflr <- scanone(brassica_traits, pheno.col = 2, method = "imp", chr = "A10")
+plot(oldmapplotflr)
+peak2 <- 9
+oldplot_flr <- ggplot(oldmapplotflr)
+oldplot_flr <- oldplot_flr +  theme_bw() + scale_y_continuous(limits=c(0, 13)) +
+geom_line(aes(x = pos, y = lod), size = 2) +
+geom_hline(yintercept = 3.08, color = "red", size = 1) +
+geom_segment(aes(x = pos, xend = pos), y = (peak * -0.02), yend = (peak * -0.05)) +
+theme(text = element_text(size = 20)) +
+xlab("Genetic Distance (cM)") +
+ylab("LOD Score")
+oldplot_flr
+new <- scanone(brassica_newmap, pheno.col = 2)
+new2 <- new
+head(new2)
+new2$len <- 1
+new2$xnew <- 1
+new2$pos
+str(new2)
+new_map_plot <- ggplot(new2, aes(len, pos, ymin = 0, ymax = 40)) + facet_grid(. ~ chr)
+new_map_plot <- new_map_plot + geom_segment(aes(x = len - 5, y = pos, xend = len + 5, yend = pos))
+new_map_plot <- new_map_plot + geom_segment(aes(x = len, y = 0, xend = len, yend = pos))
+new_map_plot <- new_map_plot + scale_y_reverse()
+new_map_plot <- new_map_plot + theme(panel.background = NULL, axis.text.x = element_blank(),
+axis.line = element_blank(), panel.grid.major = element_blank(),
+panel.grid.minor = element_blank(), axis.ticks.x = element_blank(),
+axis.title.x = element_blank())
+new_map_plot <- new_map_plot + ylab("Genetic Position (cM)") + ggtitle("")
+new_map_plot
+str(new2)
+new_map_plot <- ggplot(new2, aes(len, pos, ymin = 0, ymax = 40)) + facet_grid(. ~ chr)
+new_map_plot <- new_map_plot + geom_segment(aes(x = len - 5, y = pos, xend = len + 5, yend = pos))
+new_map_plot <- new_map_plot + geom_segment(aes(x = len, y = 0, xend = len, yend = pos))
+new_map_plot <- new_map_plot + scale_y_reverse()
+new_map_plot <- new_map_plot + theme(panel.background = element_blank(), axis.text.x = element_blank(),
+axis.line = element_blank(), panel.grid.major = element_blank(),
+panel.grid.minor = element_blank(), axis.ticks.x = element_blank(),
+axis.title.x = element_blank())
+new_map_plot <- new_map_plot + ylab("Genetic Position (cM)") + ggtitle("")
+new_map_plot
+library(cowplot)
+plot_grid(old_map_plot, new_map_plot, oldplot_flr, newplot_flr, labels=c("A", "B", "D", "E"))
+figure_X <- plot_grid(old_map_plot, new_map_plot, oldplot_flr, newplot_flr, labels=c("A", "B", "D", "E"))
+ggsave("genetic_map_qtl_figure.pdf", figure_X)
 setwd("/Users/Cody_2/git.repos/brassica_genetic_map_paper/output")
-v2.1_map <- read.cross("csvsr", genfile ="snp_map_rqtl_Mbp_ref1.5_cross_output_gen.csv",
-phefile="snp_map_rqtl_Mbp_ref1.5_cross_output_phe.csv",
-genotypes=c("AA","BB"),
-na.strings=c("NA","AB"))
-setwd("/Users/Cody_2/git.repos/brassica_genetic_map_paper/output")
-v2.1_map <- read.cross("csvsr", genfile ="snp_map_rqtl_Mbp_ref1.5_cross_output_gen.csv",
-phefile="snp_map_rqtl_Mbp_ref1.5_cross_output_phe.csv",
-genotypes=c("AA","BB"),
-na.strings=c("NA","-"))
-v2.1_map <- pull.map(brassica_fix, as.table=TRUE)
-v2.1_map
-v2.1_map$markernames <- rownames(v2.1_map)
-rownames(v2.1_map) <- NULL
-head(v2.1_map)
-v2.1_map_description <- ldply(strsplit(as.character(v2.1_map$markernames),split="x"))
-head(v2.1_map_description)
-setwd("/Users/Cody_2/git.repos/brassica_genetic_map_paper/output")
-b_map_red <- read.cross("csvsr", genfile ="snp_map_rqtl_Mbp_ref1.5_cross_output_gen.csv",
-phefile="snp_map_rqtl_Mbp_ref1.5_cross_output_phe.csv",
-genotypes=c("AA","BB"),
-na.strings=c("NA","-"))
-#reformat for plotting in ggplot
-v2.1_map <- pull.map(b_map_red, as.table=TRUE)
-v2.1_map
-v2.1_map$markernames <- rownames(v2.1_map)
-rownames(v2.1_map) <- NULL
-head(v2.1_map)
-v2.1_map_description <- ldply(strsplit(as.character(v2.1_map$markernames),split="x"))
-head(v2.1_map_description)
-v2.1_map$genomic_pos <- v2.1_map_description[,2]
-head(v2.1_map)
-str(v2.1_map)
-plot(v2.1_map$pos, v2.1_map$genomic_pos)
-plot(v2.1_map$pos, v2.1_map$genomic_pos)
-v2.1_map$genomic_pos <- as.numeric(v2.1_map$genomic_pos)
-v2.1_map$genomic_pos <- (v2.1_map$genomic_pos)/1000000
-A01_plot <- ggplot(v2.1_map, aes(x=pos, y=genomic_pos))
-plot <- plot + geom_point(shape=1) + facet_grid(chr ~ . )
-plot <- plot + xlab("Genetic Position (cM)") + ylab("Physical Position (Mbp)")
-A01_plot <- ggplot(v2.1_map, aes(x=pos, y=genomic_pos))
-plot <- plot + geom_point(shape=1) + facet_grid(chr ~ . )
-2
-2
-2
-2
-_
-A01_plot <- ggplot(v2.1_map, aes(x=pos, y=genomic_pos))
-A01_plot <- A01_plot + geom_point(shape=1) + facet_grid(chr ~ . )
-A01_plot <- A01_plot + xlab("Genetic Position (cM)") + ylab("Physical Position (Mbp)")
-A01_plot
-all_chr_plot <- ggplot(v2.1_map, aes(x=pos, y=genomic_pos))
-all_chr_plot <- all_chr_plot + geom_point(shape=1) + facet_grid(chr ~ . )
-all_chr_plot <- all_chr_plot + xlab("Genetic Position (cM)") + ylab("Physical Position (Mbp)")
-all_chr_plot
-setwd("/Users/Cody_2/git.repos/brassica_genetic_map_paper/output")
-v2.1_A01 <- subset(v2.1_map, chr == "A01")
-plot(v2.1_A01$pos, v2.1_A01$genomic_pos)
-head(v2.1_A01)
-str(v2.1_A01)
-v2.1_A01$genomic_pos <- as.numeric(v2.1_A01$genomic_pos)
-A01_plot <- ggplot(v2.1_A01, aes(x=pos, y=genomic_pos))
-A01_plot <- A01_plot + geom_point(shape=1) + facet_grid(chr ~ . )
-A01_plot <- A01_plot + xlab("Genetic Position (cM)") + ylab("Physical Position (Mbp)")
-A01_plot
-ggsave("A01_genetic_vs_physical_v2.1.pdf")
-v2.1_A02 <- subset(v2.1_map, chr == "A02")
-plot(v2.1_A02$pos, v2.1_A02$genomic_pos)
-head(v2.1_A02)
-str(v2.1_A02)
-v2.1_A02$genomic_pos <- as.numeric(v2.1_A02$genomic_pos)
-A02_plot <- ggplot(v2.1_A02, aes(x=pos, y=genomic_pos))
-A02_plot <- A02_plot + geom_point(shape=1) + facet_grid(chr ~ . )
-A02_plot <- A02_plot + xlab("Genetic Position (cM)") + ylab("Physical Position (Mbp)")
-A02_plot
-ggsave("A02_genetic_vs_physical_v2.1.pdf")
-v2.1_A03 <- subset(v2.1_map, chr == "A03")
-plot(v2.1_A03$pos, v2.1_A03$genomic_pos)
-head(v2.1_A03)
-str(v2.1_A03)
-v2.1_A03$genomic_pos <- as.numeric(v2.1_A03$genomic_pos)
-A03_plot <- ggplot(v2.1_A03, aes(x=pos, y=genomic_pos))
-A03_plot <- A03_plot + geom_point(shape=1) + facet_grid(chr ~ . )
-A03_plot <- A03_plot + xlab("Genetic Position (cM)") + ylab("Physical Position (Mbp)")
-A03_plot
-ggsave("A03_genetic_vs_physical_v2.1.pdf")
-v2.1_A04 <- subset(v2.1_map, chr == "A04")
-plot(v2.1_A04$pos, v2.1_A04$genomic_pos)
-head(v2.1_A04)
-str(v2.1_A04)
-v2.1_A04$genomic_pos <- as.numeric(v2.1_A04$genomic_pos)
-A04_plot <- ggplot(v2.1_A04, aes(x=pos, y=genomic_pos))
-A04_plot <- A04_plot + geom_point(shape=1) + facet_grid(chr ~ . )
-A04_plot <- A04_plot + xlab("Genetic Position (cM)") + ylab("Physical Position (Mbp)")
-A04_plot
-ggsave("A04_genetic_vs_physical_v2.1.pdf")
-v2.1_A05 <- subset(v2.1_map, chr == "A05")
-plot(v2.1_A05$pos, v2.1_A05$genomic_pos)
-head(v2.1_A05)
-str(v2.1_A05)
-v2.1_A05$genomic_pos <- as.numeric(v2.1_A05$genomic_pos)
-A05_plot <- ggplot(v2.1_A05, aes(x=pos, y=genomic_pos))
-A05_plot <- A05_plot + geom_point(shape=1) + facet_grid(chr ~ . )
-A05_plot <- A05_plot + xlab("Genetic Position (cM)") + ylab("Physical Position (Mbp)")
-A05_plot
-ggsave("A05_genetic_vs_physical_v2.1.pdf")
-# A06
-v2.1_A06 <- subset(v2.1_map, chr == "A06")
-plot(v2.1_A06$pos, v2.1_A06$genomic_pos)
-head(v2.1_A06)
-str(v2.1_A06)
-v2.1_A06$genomic_pos <- as.numeric(v2.1_A06$genomic_pos)
-A06_plot <- ggplot(v2.1_A06, aes(x=pos, y=genomic_pos))
-A06_plot <- A06_plot + geom_point(shape=1) + facet_grid(chr ~ . )
-A06_plot <- A06_plot + xlab("Genetic Position (cM)") + ylab("Physical Position (Mbp)")
-A06_plot
-ggsave("A06_genetic_vs_physical_v2.1.pdf")
-# A07
-v2.1_A07 <- subset(v2.1_map, chr == "A07")
-plot(v2.1_A07$pos, v2.1_A07$genomic_pos)
-head(v2.1_A07)
-str(v2.1_A07)
-v2.1_A07$genomic_pos <- as.numeric(v2.1_A07$genomic_pos)
-A07_plot <- ggplot(v2.1_A07, aes(x=pos, y=genomic_pos))
-A07_plot <- A07_plot + geom_point(shape=1) + facet_grid(chr ~ . )
-A07_plot <- A07_plot + xlab("Genetic Position (cM)") + ylab("Physical Position (Mbp)")
-A07_plot
-ggsave("A07_genetic_vs_physical_v2.1.pdf")
-# A08
-v2.1_A08 <- subset(v2.1_map, chr == "A08")
-plot(v2.1_A08$pos, v2.1_A08$genomic_pos)
-head(v2.1_A08)
-str(v2.1_A08)
-v2.1_A08$genomic_pos <- as.numeric(v2.1_A08$genomic_pos)
-A08_plot <- ggplot(v2.1_A08, aes(x=pos, y=genomic_pos))
-A08_plot <- A08_plot + geom_point(shape=1) + facet_grid(chr ~ . )
-A08_plot <- A08_plot + xlab("Genetic Position (cM)") + ylab("Physical Position (Mbp)")
-A08_plot
-ggsave("A08_genetic_vs_physical_v2.1.pdf")
-# A09
-v2.1_A09 <- subset(v2.1_map, chr == "A09")
-plot(v2.1_A09$pos, v2.1_A09$genomic_pos)
-head(v2.1_A09)
-str(v2.1_A09)
-v2.1_A09$genomic_pos <- as.numeric(v2.1_A09$genomic_pos)
-A09_plot <- ggplot(v2.1_A09, aes(x=pos, y=genomic_pos))
-A09_plot <- A09_plot + geom_point(shape=1) + facet_grid(chr ~ . )
-A09_plot <- A09_plot + xlab("Genetic Position (cM)") + ylab("Physical Position (Mbp)")
-A09_plot
-ggsave("A09_genetic_vs_physical_v2.1.pdf")
-# A10
-v2.1_A10 <- subset(v2.1_map, chr == "A10")
-plot(v2.1_A10$pos, v2.1_A10$genomic_pos)
-head(v2.1_A10)
-str(v2.1_A10)
-v2.1_A10$genomic_pos <- as.numeric(v2.1_A10$genomic_pos)
-A10_plot <- ggplot(v2.1_A10, aes(x=pos, y=genomic_pos))
-A10_plot <- A10_plot + geom_point(shape=1) + facet_grid(chr ~ . )
-A10_plot <- A10_plot + xlab("Genetic Position (cM)") + ylab("Physical Position (Mbp)")
-A10_plot
-ggsave("A10_genetic_vs_physical_v2.1.pdf")
-setwd("/Users/Cody_2/git.repos/brassica_genetic_map_paper/output")
-b_map_red <- read.cross("csvsr", genfile ="snp_map_rqtl_Mbp_ref1.5_cross_output_gen.csv",
-phefile="snp_map_rqtl_Mbp_ref1.5_cross_output_phe.csv",
-genotypes=c("AA","BB"),
-na.strings=c("NA","-"))
-class(b_map_red)[1] <- "riself"
-b_map_red <- jittermap(b_map_red)
-b_map_red
-chr1 <- markernames(b_map_red, chr='A01')
-chr1 # reverse marker order
-chr9 <- markernames(b_map_red, chr='A09')
-chr9 # okay
-chr10 <- markernames(b_map_red, chr='A10')
-chr10
-chr8 <- markernames(b_map_red, chr='A08')
-chr8
-chr9 <- markernames(b_map_red, chr='A09')
-chr9 # reorder within, or potential inversion?
-chr9[37:52]
-chr9[37:52] <- rev(chr9[37:52])
-chr9
-chr9 <- markernames(b_map_red, chr='A09')
-chr9
-chr9[37:52] <- rev(chr9[37:52])
-chr9
-b_map_red <- switch.order(b_map_red, chr = "A09", order = chr9)
-markernames(b_map_red, chr='A09')
-plotMap(b_map_red, chr='A09')
-plot.rf(b_map_red, chr='A09')
-?est.rf
-b_map_red <- est.rf(b_map_red)
-plot.rf(b_map_red, chr='A09')
-plot.rf(b_map_red, chr='A09')
-setwd("/Users/Cody_2/git.repos/brassica_genetic_map_paper/output")
-b_map_red <- read.cross("csvsr", genfile ="snp_map_rqtl_Mbp_ref1.5_cross_output_gen.csv",
-phefile="snp_map_rqtl_Mbp_ref1.5_cross_output_phe.csv",
-genotypes=c("AA","BB"),
-na.strings=c("NA","-"))
-class(b_map_red)[1] <- "riself"
-b_map_red <- jittermap(b_map_red)
-b_map_red
-chr9 <- markernames(b_map_red, chr='A09')
-chr9
-plot.rf(b_map_red, chr='A09')
-chr9 <- markernames(b_map_red, chr='A09')
-chr9
-chr9[37:52] <- rev(chr9[37:52])
-chr9
-b_map_red <- switch.order(b_map_red, chr = "A09", order = chr9)
-b_map_red <- est.rf(b_map_red)
-plot.rf(b_map_red, chr='A09')
+ggsave("genetic_map_qtl_figure.pdf", figure_X)
+ggdraw(newplot_flr) + #
+  draw_plot_label("E", size = 14) + #
+  draw_text("DRAFT!", angle = 45, size = 80, alpha = .2)
+draft <- ggdraw(newplot_flr) + draw_plot_label("", size = 14) +
+draw_text("DRAFT!", angle = 45, size = 100, alpha = .2)
+draft
+ggsave("draft_figure.pdf", draft)

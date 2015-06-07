@@ -11,8 +11,8 @@ genetic_map <- shiftmap(genetic_map)
 out <- scanone(genetic_map, pheno.col = 2)
 out2 <- out
 head(out2)
-out2$len <- 1
-out2$xout   <- 1
+out2$len  <- 1
+out2$xout <- 1
 out2$pos
 str(out2)
 
