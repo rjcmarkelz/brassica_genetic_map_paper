@@ -152,8 +152,6 @@ draft
 ggsave("draft_figure.pdf", draft)
 
 
-
-
 #############
 #############
 # supplemental data

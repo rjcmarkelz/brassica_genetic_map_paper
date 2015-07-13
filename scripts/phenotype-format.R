@@ -1,3 +1,6 @@
+# Phenotype Data Conversion to rqtl csvsr format
+# see http://www.rqtl.org/sampledata/ for details about formats
+
 library(qtl)
 library(readxl)
 

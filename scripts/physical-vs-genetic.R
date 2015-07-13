@@ -9,7 +9,9 @@ b_map_red <- read.cross("csvsr", genfile ="snp_map_rqtl_Mbp_ref1.5_cross_output_
 	                       phefile="snp_map_rqtl_Mbp_ref1.5_cross_output_phe.csv", 
 	                       genotypes=c("AA","BB"), 
 	                       na.strings=c("NA","-"))
-
+class(b_map_red)[1] <- "riself"
+b_map_red <- jittermap(b_map_red)
+b_map_red
 
 #reformat for plotting in ggplot
 v2.1_map <- pull.map(b_map_red, as.table=TRUE)
@@ -178,3 +180,6 @@ A10_plot
 ggsave("A10_genetic_vs_physical_v2.1.pdf")
 
 # end
+
+
+

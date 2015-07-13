@@ -2,9 +2,6 @@ library(qtl)
 library(ggplot2)
 plotMap(newmap)
 
-plotMap
-newmap
-str(genetic_map)
 
 genetic_map <- shiftmap(genetic_map)
 
@@ -15,29 +12,6 @@ out2$len <- 1
 out2$xout   <- 1
 out2$pos
 str(out2)
-
-
-map_plot <- ggplot(out2, aes(len, pos)) + geom_point() + facet_grid(. ~ chr)
-map_plot <- map_plot + geom_errorbarh(aes(xmax = xout + 5, xmin = xout - 5, height = 0))
-map_plot <- map_plot + theme(panel.background = NULL)
-map_plot
-
-
-map_plot <- ggplot(out2, aes(len, pos)) + facet_grid(. ~ chr)
-map_plot <- map_plot + geom_segment(aes(x = len - 5, y = pos, xend = len + 5, yend = pos))
-map_plot <- map_plot + theme(panel.background = NULL)
-map_plot
-
-map_plot <- ggplot(out2, aes(len, pos, ymin = 0, ymax = 40)) + facet_grid(. ~ chr)
-map_plot <- map_plot + geom_segment(aes(x = len - 5, y = pos, xend = len + 5, yend = pos))
-map_plot <- map_plot + scale_y_reverse()
-map_plot <- map_plot + theme(panel.background = NULL, axis.text.x = element_blank(),
-                             axis.line = element_blank(), panel.grid.major = element_blank(), 
-                             panel.grid.minor = element_blank(), axis.ticks.x = element_blank(), 
-                             axis.title.x = element_blank())
-map_plot <- map_plot + ylab("Genetic Position (cM)") + ggtitle("")
-map_plot
-
 
 map_plot <- ggplot(out2, aes(len, pos, ymin = 0, ymax = 40)) + facet_grid(. ~ chr)
 map_plot <- map_plot + geom_segment(aes(x = len - 5, y = pos, xend = len + 5, yend = pos))
@@ -53,10 +27,11 @@ map_plot
 ggsave("test_genetic.pdf", map_plot)
 
 
-library(qtl)
+
 ###########
 # Old Map
 ###########
+library(qtl)
 setwd("~/git.repos/brassica_meta_analysis/raw_data/")
 brassica_traits <- read.cross("csvsr", genfile ="old_map_rqtl_missing_RILS_removed.csv", 
 	                       phefile="Brock_2010_phenotype.csv", genotypes=c("0","2"))
@@ -117,6 +92,11 @@ oldmapplotflr
 ###########
 # New Map
 ###########
+setwd("/Users/Cody_2/git.repos/brassica_eqtl_v1.5/data")
+br_phys <- read.cross("csvsr", genfile ="Brassica_F8_v2.1_gen.csv", 
+                         phefile="br_blups_RQTL.csv", 
+                         genotypes=c("AA","BB"), na.strings = c("-","NA"))
+
 brassica_newmap <- read.cross("csvsr", genfile ="Brassica_F8_v1.0_gen.csv", 
 	                       phefile="Brock_2010_phenotype.csv", genotypes=c("AA","BB"))
 head(brassica_newmap)
@@ -194,3 +174,7 @@ setwd("/Users/Cody_2/git.repos/brassica_genetic_map/output")
 ggsave("new_genetic_map.pdf", new_map_plot)
 
 
+genetic_map <- read.cross("csvsr", genfile = "snp_map_rqtl_Mbp_ref1.5.csv", 
+	                       phefile = "phenotype.csv", 
+	                       genotypes = c("AA","BB"), 
+	                       na.strings = c("NA","AB"))
