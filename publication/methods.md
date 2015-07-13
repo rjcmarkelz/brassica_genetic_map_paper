@@ -10,7 +10,6 @@ The genetic map construction was done using the R statistical environment with t
 
 In brief, each chromosome was treated as a large linkage group and each SNP was tested for linkage disequilibrium with all other SNPs to find and move misplaced markers.
 
-
 The larger gaps in the map are where we had little marker information and corresponded to centromeric regions.
 
 These large gaps caused a small problem when ordering the markers and connecting each of the chromosomal arms in the correct order.
