@@ -17,3 +17,34 @@ for (chr in unique(bin.genotypes$chr)) {
 }
 write.table(bin.genotypes, 'bin-genotypes.scaffolds-chromosomes.2015-07-13.indexed', quote=F, sep='\t', row.names=F)
 ```
+
+Function to return the top 10 similar bins:
+
+```r
+similar.bins <- function(bin, df=dist.df, top.n=10) {
+  bin.df <- df[, bin, drop=F]
+  bin.df <- bin.df[order(bin.df[, 1]), , drop=F]
+  return(bin.df[1:top.n, , drop=F])
+}
+```
+
+Usage example:
+
+```r
+similar.bins('Scaffold000100_416921')
+```
+
+Output example:
+
+                 Scaffold000100_416921
+    A02_21152172            0.00000000
+    A06_12814512            0.00000000
+    A06_11042216            0.01333333
+    A06_14144472            0.01351351
+    A06_10175707            0.02666667
+    A06_14379326            0.03947368
+    A06_9978506             0.04000000
+    A06_14927290            0.05263158
+    A06_15466097            0.06578947
+    A06_9706189             0.06666667
+
