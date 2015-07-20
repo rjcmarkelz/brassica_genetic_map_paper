@@ -2,7 +2,7 @@
 Make a version of the combined scaffolds and chromosomes bin genotype file with columns for original chromosome and order on that chromosome for each bin prior to making any rearrangements to improve the assembly.
 
 ```r
-setwd('data/bin/')
+setwd('data/bins/')
 bin.genotypes <- read.table('bin-genotypes.scaffolds-chromosomes.2015-07-13', header=T)
 
 chr.orig <- NaN
