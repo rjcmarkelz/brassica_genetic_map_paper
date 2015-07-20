@@ -5,14 +5,17 @@ Make a version of the combined scaffolds and chromosomes bin genotype file with 
 setwd('data/bins/')
 bin.genotypes <- read.table('bin-genotypes.scaffolds-chromosomes.2015-07-13', header=T)
 
-chr.orig <- NaN
+chr.new <- 'NA'
 idx.orig <- NaN
-bin.genotypes <- cbind(chr.orig, idx.orig, bin.genotypes)
+comments <- ''
+bin.genotypes <- cbind(chr.new, idx.orig, bin.genotypes, comments)
+bin.genotypes$chr.new <- as.character(bin.genotypes$chr.new)
+bin.genotypes$comments <- as.character(bin.genotypes$comments)
 
 for (chr in unique(bin.genotypes$chr)) {
   if (grepl('Scaffold', chr)) next
   chr.current <- bin.genotypes$chr == chr
-  bin.genotypes$chr.orig[chr.current] <- as.character(bin.genotypes$chr[chr.current])
+  bin.genotypes$chr.new[chr.current] <- as.character(bin.genotypes$chr[chr.current])
   bin.genotypes$idx.orig[chr.current] <- seq(1, length(bin.genotypes$idx.orig[chr.current]))
 }
 write.table(bin.genotypes, 'bin-genotypes.scaffolds-chromosomes.2015-07-13.indexed', quote=F, sep='\t', row.names=F)
