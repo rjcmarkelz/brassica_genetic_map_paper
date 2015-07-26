@@ -51,3 +51,18 @@ Output example:
     A06_15466097            0.06578947
     A06_9706189             0.06666667
 
+After rearranging bins to place Scaffolds and fix genome misassemblies, add a column with the new chromosome index (`idx.new`):
+
+```r
+setwd('data/bins/')
+bin.genotypes <- read.table('bin-genotypes.scaffolds-chromosomes.2015-07-13.indexed', header=T, fill=T)
+
+idx.new <- NaN
+bin.genotypes <- cbind(idx.new, bin.genotypes)
+
+for (chr in unique(bin.genotypes$chr.new)) {
+  chr.current <- which(bin.genotypes$chr.new == chr)
+  bin.genotypes$idx.new[chr.current] <- seq(1, length(chr.current))
+}
+write.table(bin.genotypes, 'bin-genotypes.scaffolds-chromosomes.2015-07-13.indexed', quote=F, sep='\t', row.names=F)
+```
