@@ -5,17 +5,17 @@ Make a version of the combined scaffolds and chromosomes bin genotype file with 
 setwd('data/bins/')
 bin.genotypes <- read.table('bin-genotypes.scaffolds-chromosomes.2015-07-13', header=T)
 
-chr.new <- 'NA'
+chr <- 'NA'
 idx.orig <- NaN
 comments <- ''
-bin.genotypes <- cbind(chr.new, idx.orig, bin.genotypes, comments)
-bin.genotypes$chr.new <- as.character(bin.genotypes$chr.new)
+bin.genotypes <- cbind(chr, idx.orig, bin.genotypes, comments)
+bin.genotypes$chr <- as.character(bin.genotypes$chr)
 bin.genotypes$comments <- as.character(bin.genotypes$comments)
 
-for (chr in unique(bin.genotypes$chr)) {
+for (chr in unique(bin.genotypes$chr.orig)) {
   if (grepl('Scaffold', chr)) next
-  chr.current <- bin.genotypes$chr == chr
-  bin.genotypes$chr.new[chr.current] <- as.character(bin.genotypes$chr[chr.current])
+  chr.current <- bin.genotypes$chr.orig == chr
+  bin.genotypes$chr[chr.current] <- as.character(bin.genotypes$chr.orig[chr.current])
   bin.genotypes$idx.orig[chr.current] <- seq(1, length(bin.genotypes$idx.orig[chr.current]))
 }
 write.table(bin.genotypes, 'bin-genotypes.scaffolds-chromosomes.2015-07-13.indexed', quote=F, sep='\t', row.names=F)
@@ -51,18 +51,18 @@ Output example:
     A06_15466097            0.06578947
     A06_9706189             0.06666667
 
-After rearranging bins to place Scaffolds and fix genome misassemblies, add a column with the new chromosome index (`idx.new`):
+After rearranging bins to place Scaffolds and fix genome misassemblies, add a column with the new chromosome index (`idx`):
 
 ```r
 setwd('data/bins/')
 bin.genotypes <- read.table('bin-genotypes.scaffolds-chromosomes.2015-07-13.indexed', header=T, fill=T)
 
-idx.new <- NaN
-bin.genotypes <- cbind(idx.new, bin.genotypes)
+idx <- NaN
+bin.genotypes <- cbind(idx, bin.genotypes)
 
-for (chr in unique(bin.genotypes$chr.new)) {
-  chr.current <- which(bin.genotypes$chr.new == chr)
-  bin.genotypes$idx.new[chr.current] <- seq(1, length(chr.current))
+for (chr in unique(bin.genotypes$chr)) {
+  chr.current <- which(bin.genotypes$chr == chr)
+  bin.genotypes$idx[chr.current] <- seq(1, length(chr.current))
 }
 write.table(bin.genotypes, 'bin-genotypes.scaffolds-chromosomes.2015-07-13.indexed', quote=F, sep='\t', row.names=F)
 ```
