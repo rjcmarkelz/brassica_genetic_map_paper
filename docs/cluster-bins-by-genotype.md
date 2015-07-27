@@ -78,3 +78,25 @@ for (i in 1:(ncol(dist.df) - 2)) {
   ggsave(paste0(out.dir, "/", marker, ".png"), p, width = 11, height = 4)
 }
 ```
+
+# Re-cluster bins after they have been rearranged to assign scaffolds and fix misassemblies
+
+```r
+setwd("data")
+bin.file <- "bins/bin-genotypes.scaffolds-chromosomes.2015-07-13.indexed"
+
+bin.geno <- read.table(bin.file, header = TRUE, sep = "\t", as.is = TRUE)
+bin.geno[bin.geno == "R500"]   <-  0
+bin.geno[bin.geno == "IMB211"] <-  1
+bin.geno[bin.geno == "HET"]    <-  NA
+
+chr <- bin.geno$chr
+idx <- bin.geno$idx
+rownames(bin.geno) <- paste(chr, idx, sep = "_")
+
+distances   <- dist(bin.geno[, 8:(ncol(bin.geno) - 1)], method = "binary")
+dist.m      <- as.matrix(distances)
+dist.df     <- cbind(chr, idx, as.data.frame(dist.m))
+
+write.table(dist.df, 'bins/bin-correlations.rearranged.tsv', sep='\t', quote=F, col.names=NA)
+```
