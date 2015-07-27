@@ -26,3 +26,55 @@ write.table(dist.df, 'bins/bin-correlations.tsv', sep='\t', quote=F, col.names=N
 # > all.equal(bin.cors, dist.df)
 # [1] TRUE
 ```
+
+# Plot related bins
+
+```r
+# Still have 'dist.df' defined from above and working directory set to 'data'
+
+library(ggplot2)
+
+out.dir <- "plots.related-bins"
+dir.create(out.dir)
+
+for (i in 1:(ncol(dist.df) - 2)) {
+  threshold <- quantile(dist.df[, i], 0.01)
+  hits <- dist.df[, i] < threshold
+  hits.dist <- dist.df[hits, i]
+  hits.pos <- dist.df$pos[hits]
+  hits.chr <- dist.df$chr[hits]
+
+  marker <- names(dist.df)[i]
+
+  if (!grepl('Scaffold', marker)) {
+    chr <- sub("_\\d*", "", marker)
+    chr.dist.df <- dist.df[dist.df$chr == chr, ]
+    p <- ggplot(chr.dist.df) +
+           geom_point(size = 1.5, aes(x = pos, y = chr.dist.df[, i],
+                      color = ( chr.dist.df[, i] < threshold ))) +
+           ggtitle(marker) +
+           xlab("Physical Postition (Mb)") +
+           ylab("Asymmetric Binary Distance") +
+           guides(color = FALSE) +
+           scale_colour_manual(values = c("dark grey","red")) +
+           scale_x_continuous(breaks = seq(0, 40000000, 10000000),
+                              labels = seq(0, 40, 10))
+    ggsave(paste0(out.dir, "/", chr, ".", marker, ".png"), p, width = 11, height = 4)
+  }
+
+  if (length(unique(hits.chr)) == 1 && !grepl('Scaffold', marker)) next
+
+  p <- ggplot(dist.df) +
+         geom_point(size = 1.5, aes(x = pos, y = dist.df[, i],
+                    color = ( dist.df[, i] < threshold ))) +
+         facet_grid(. ~ chr, scales = "free") +
+         ggtitle(marker) +
+         xlab("Physical Postition (Mb)") +
+         ylab("Asymmetric Binary Distance") +
+         guides(color = FALSE) +
+         scale_colour_manual(values = c("dark grey","red")) +
+         scale_x_continuous(breaks = seq(0, 40000000, 10000000),
+                            labels = seq(0, 40, 10))
+  ggsave(paste0(out.dir, "/", marker, ".png"), p, width = 11, height = 4)
+}
+```
