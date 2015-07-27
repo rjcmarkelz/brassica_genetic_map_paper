@@ -10,7 +10,7 @@ bin.geno[bin.geno == "IMB211"] <-  1
 bin.geno[bin.geno == "HET"]    <-  NA
 rownames(bin.geno) <- paste(bin.geno[, 1], bin.geno[, 2], sep = "_")
 
-distances   <- dist(bin.geno[, 3:ncol(bin.geno)], method = "binary")
+distances   <- dist(bin.geno[, 5:ncol(bin.geno)], method = "binary")
 dist.m      <- as.matrix(distances)
 dist.df     <- as.data.frame(dist.m)
 dist.df$chr <- bin.geno$chr
