@@ -8,15 +8,15 @@ bin.geno <- read.table(bin.file, header = TRUE, sep = "\t", as.is = TRUE)
 bin.geno[bin.geno == "R500"]   <-  0
 bin.geno[bin.geno == "IMB211"] <-  1
 bin.geno[bin.geno == "HET"]    <-  NA
-rownames(bin.geno) <- paste(bin.geno[, 1], bin.geno[, 2], sep = "_")
+
+chr <- bin.geno$chr
+pos <- bin.geno$bin.mid
+rownames(bin.geno) <- paste(chr, pos, sep = "_")
 
 distances   <- dist(bin.geno[, 5:ncol(bin.geno)], method = "binary")
 dist.m      <- as.matrix(distances)
-dist.df     <- as.data.frame(dist.m)
-dist.df$chr <- bin.geno$chr
-dist.df$pos <- bin.geno$bin.mid
-
-dist.df <- dist.df[!grepl('Scaffold', dist.df$chr), ]
+dist.df     <- cbind(chr, pos, as.data.frame(dist.m))
+dist.df     <- dist.df[!grepl('Scaffold', dist.df$chr), ]
 
 write.table(dist.df, 'bins/bin-correlations.tsv', sep='\t', quote=F, col.names=NA)
 
@@ -37,7 +37,7 @@ library(ggplot2)
 out.dir <- "plots.related-bins"
 dir.create(out.dir)
 
-for (i in 1:(ncol(dist.df) - 2)) {
+for (i in 3:ncol(dist.df)) {
   threshold <- quantile(dist.df[, i], 0.01)
   hits <- dist.df[, i] < threshold
   hits.dist <- dist.df[hits, i]
