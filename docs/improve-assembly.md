@@ -24,6 +24,12 @@ for (chr in unique(bin.genotypes$chr.orig)) {
 write.table(bin.genotypes, 'bin-genotypes.scaffolds-chromosomes.2015-07-13.indexed', quote=F, sep='\t', row.names=F)
 ```
 
+Make a copy of the original indexed bin genotypes
+
+```sh
+cp data/bins/bin-genotypes.scaffolds-chromosomes.2015-07-13.indexed data/bins/bin-genotypes.scaffolds-chromosomes.2015-07-13.indexed.original
+```
+
 Function to return the top 10 similar bins:
 
 ```r

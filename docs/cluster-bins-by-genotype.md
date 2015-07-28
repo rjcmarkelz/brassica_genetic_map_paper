@@ -148,3 +148,29 @@ bin.distance.plot <- function(dist.df) {
 p <- bin.distance.plot(dist.df)
 ggsave('bins/bin-distances.rearranged.png', p, width = 8, height = 8)
 ```
+
+# Plot original pairwise distances for bins
+
+```r
+setwd("data")
+bin.file <- "bins/bin-genotypes.scaffolds-chromosomes.2015-07-13.indexed.original"
+
+bin.geno <- read.table(bin.file, header = TRUE, sep = "\t", as.is = TRUE)
+bin.geno[bin.geno == "R500"]   <-  0
+bin.geno[bin.geno == "IMB211"] <-  1
+bin.geno[bin.geno == "HET"]    <-  NA
+
+bin.geno$idx.orig[is.na(bin.geno$chr)] <- seq(1, length(bin.geno$chr[is.na(bin.geno$chr)]))
+bin.geno$chr[is.na(bin.geno$chr)] <- 'A00'
+
+chr <- bin.geno$chr
+idx <- bin.geno$idx.orig
+rownames(bin.geno) <- paste(chr, idx, sep = "_")
+
+distances   <- dist(bin.geno[, 7:(ncol(bin.geno) - 1)], method = "binary")
+dist.m      <- as.matrix(distances)
+dist.df     <- cbind(chr, idx, as.data.frame(dist.m))
+
+p <- bin.distance.plot(dist.df)
+ggsave('bins/bin-distances.original.png', p, width = 8, height = 8)
+```
