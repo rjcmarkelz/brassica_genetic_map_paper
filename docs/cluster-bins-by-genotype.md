@@ -104,42 +104,47 @@ write.table(dist.df, 'bins/bin-correlations.rearranged.tsv', sep='\t', quote=F, 
 # Plot pairwise distances for bins after they have been rearranged to assign scaffolds and fix misassemblies
 
 ```r
-library(ggplot2)
-library(grid)
-library(reshape2)
+bin.distance.plot <- function(dist.df) {
+  library(ggplot2)
+  library(grid)
+  library(reshape2)
 
-dist.melt <- melt(dist.df, id.vars = c('chr', 'idx'))
-dist.melt <- cbind(dist.melt, colsplit(dist.melt$variable, '_', c('chr2', 'idx2')))
-dist.melt$chr2 <- factor(dist.melt$chr2, levels = rev(levels(dist.melt$chr)))
+  dist.melt <- melt(dist.df, id.vars = c('chr', 'idx'))
+  dist.melt <- cbind(dist.melt, colsplit(dist.melt$variable, '_', c('chr2', 'idx2')))
+  dist.melt$chr2 <- factor(dist.melt$chr2, levels = rev(levels(dist.melt$chr)))
 
-p <- ggplot(dist.melt, aes(x = idx, y = idx2)) +
-       geom_tile(aes(fill = value)) +
-       scale_fill_gradientn(limits = c(0, 0.4), colours = c('dodgerblue4', 'dodgerblue', 'white'),  na.value = 'white') +
-       facet_grid(chr2 ~ chr, scales = 'free', space = 'free') +
-       theme_bw() +
-       theme(
-         axis.text = element_blank(),
-         axis.ticks = element_blank(),
-         axis.title = element_blank(),
-         panel.border = element_blank(),
-         panel.grid.major = element_blank(),
-         panel.grid.minor = element_blank(),
-         panel.margin = unit(0.1, "lines"),
-         legend.background = element_rect(colour = "darkgray", fill='white'),
-         legend.box='horizontal',
-         legend.direction='vertical',
-         legend.justification = c(0, 1),
-         legend.position = c(0.025,0.95)
-       ) +
-       guides(
-         fill = guide_colorbar(barwidth = 2.6,
-                               reverse = TRUE,
-                               title = 'Asymmetric\nBinary\nDistance\n',
-                               title.hjust = 0.5,
-                               title.position = 'top')
-       ) +
-       scale_x_continuous(expand = c(0, 0)) +
-       scale_y_continuous(expand = c(0, 0))
+  p <- ggplot(dist.melt, aes(x = idx, y = idx2)) +
+         geom_tile(aes(fill = value)) +
+         scale_fill_gradientn(limits = c(0, 0.4), colours = c('dodgerblue4', 'dodgerblue', 'white'),  na.value = 'white') +
+         facet_grid(chr2 ~ chr, scales = 'free', space = 'free') +
+         theme_bw() +
+         theme(
+           axis.text = element_blank(),
+           axis.ticks = element_blank(),
+           axis.title = element_blank(),
+           panel.border = element_blank(),
+           panel.grid.major = element_blank(),
+           panel.grid.minor = element_blank(),
+           panel.margin = unit(0.1, "lines"),
+           legend.background = element_rect(colour = "darkgray", fill='white'),
+           legend.box='horizontal',
+           legend.direction='vertical',
+           legend.justification = c(0, 1),
+           legend.position = c(0.025,0.95)
+         ) +
+         guides(
+           fill = guide_colorbar(barwidth = 2.6,
+                                 reverse = TRUE,
+                                 title = 'Asymmetric\nBinary\nDistance\n',
+                                 title.hjust = 0.5,
+                                 title.position = 'top')
+         ) +
+         scale_x_continuous(expand = c(0, 0)) +
+         scale_y_continuous(expand = c(0, 0))
 
+  return(p)
+}
+
+p <- bin.distance.plot(dist.df)
 ggsave('bins/bin-distances.rearranged.png', p, width = 8, height = 8)
 ```
