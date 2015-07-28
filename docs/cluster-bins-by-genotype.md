@@ -114,7 +114,7 @@ dist.melt$chr2 <- factor(dist.melt$chr2, levels = rev(levels(dist.melt$chr)))
 
 p <- ggplot(dist.melt, aes(x = idx, y = idx2)) +
        geom_tile(aes(fill = value)) +
-       scale_fill_gradientn(limits = c(0, 1), colours = c('dodgerblue4', 'dodgerblue', 'aliceblue', 'white')) +
+       scale_fill_gradientn(limits = c(0, 0.4), colours = c('dodgerblue4', 'dodgerblue', 'white'),  na.value = 'white') +
        facet_grid(chr2 ~ chr, scales = 'free', space = 'free') +
        theme_bw() +
        theme(
@@ -132,7 +132,7 @@ p <- ggplot(dist.melt, aes(x = idx, y = idx2)) +
          legend.position = c(0.025,0.95)
        ) +
        guides(
-         fill = guide_colorbar(barwidth = 2,
+         fill = guide_colorbar(barwidth = 2.6,
                                reverse = TRUE,
                                title = 'Asymmetric\nBinary\nDistance\n',
                                title.hjust = 0.5,
