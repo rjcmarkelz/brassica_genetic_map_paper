@@ -8,6 +8,9 @@ bin.genotypes <- read.table('bin-genotypes.scaffolds-chromosomes.2015-07-13', he
 chr <- 'NA'
 idx.orig <- NaN
 comments <- ''
+
+names(bin.genotypes)[names(bin.genotypes) == 'chr'] <- 'chr.orig'
+
 bin.genotypes <- cbind(chr, idx.orig, bin.genotypes, comments)
 bin.genotypes$chr <- as.character(bin.genotypes$chr)
 bin.genotypes$comments <- as.character(bin.genotypes$comments)
