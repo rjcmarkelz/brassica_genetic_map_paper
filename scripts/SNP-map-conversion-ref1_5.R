@@ -66,9 +66,13 @@ snpmap_rqtl$bin.mid <- snpmap_rqtl$bin.mid/1000000
 head(snpmap_rqtl)
 
 #rqtl csvsr format requires these two column names to be empty
+names(snpmap_rqtl)
 names(snpmap_rqtl)[3] <- paste("")
+str(snpmap_rqtl)
+snpmap_rqtl$chr <- as.character(snpmap_rqtl$chr)
 names(snpmap_rqtl)[2] <- paste("")
-head(snpmap_rqtl)
+head(snpmap_rqtl) 
+# really strange----for column 3 structure(c("3.323536", "3.444783",
 
 write.table(snpmap_rqtl, file= "snp_map_rqtl_Mbp_ref1.5.csv", row.names = FALSE,
              col.names = TRUE, sep = ",")
