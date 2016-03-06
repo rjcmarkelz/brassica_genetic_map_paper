@@ -4,7 +4,8 @@ setwd("/Users/Cody_2/git.repos/brassica_genetic_map_paper/input")
 library(qtl)
 
 # read in file and check format
-snpmap <- read.delim("bin-genotypes.scaffolds-chromosomes.2015-07-13.indexed.merged", header = TRUE, sep = "\t")
+snpmap <- read.delim("bin-genotypes.scaffolds-chromosomes.2015-07-13.indexed.merged",
+                      header = TRUE, sep = "\t")
 # snpmap2 <- read.delim("bin-genotypes_ref1.5_v0.1.1_tab.txt", header = TRUE, sep = "\t")
 length(snpmap)
 dim(snpmap)
@@ -69,7 +70,7 @@ names(snpmap_rqtl)[3] <- paste("")
 names(snpmap_rqtl)[2] <- paste("")
 head(snpmap_rqtl)
 
-write.table(snpmap_rqtl, file= "snp_map_rqtl_Mbp_ref1.5.csv", row.names = FALSE, col.names = TRUE,
-	           sep = ",")
+write.table(snpmap_rqtl, file= "snp_map_rqtl_Mbp_ref1.5.csv", row.names = FALSE,
+             col.names = TRUE, sep = ",")
 
 #end see snp-map-construction.R for next step
