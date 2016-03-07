@@ -55,7 +55,7 @@ old
 old2 <- old
 head(old2)
 old2$len <- 1
-old2$xold   <- 1
+old2$xold  <- 1
 old2$pos
 str(old2)
 old_map_plot <- ggplot(old2, aes(len, pos, ymin = 0, ymax = 40)) + facet_grid(. ~ chr)
@@ -104,29 +104,30 @@ old_flr_perm_95 <- summary(old_flr_perm)[1] #keep 95%
 summary(old_flr_perm)
 # LOD thresholds (10000 permutations)
 #      lod
-# 5%  2.68
-# 10% 2.36
+# 5%  2.66
+# 10% 2.35
 oldmapplotflr <- scanone(brassica_traits, pheno.col = 2, method = "imp", chr = "A10")
 plot(oldmapplotflr)
 peak2 <- 9
 oldplot_flr <- ggplot(oldmapplotflr)
 oldplot_flr <- oldplot_flr +  theme_bw() + scale_y_continuous(limits=c(0, 13)) + 
                         geom_line(aes(x = pos, y = lod), size = 2) +
-                        geom_hline(yintercept = 3.08, color = "red", size = 1) +
-                        geom_segment(aes(x = pos, xend = pos), y = (peak * -0.02), yend = (peak * -0.05)) +
+                        geom_hline(yintercept = 2.66, color = "red", size = 1) +
+                        geom_segment(aes(x = pos, xend = pos), y = (peak2 * -0.02), yend = (peak2 * -0.05)) +
                         theme(text = element_text(size = 20)) +
                         xlab("Genetic Distance (cM)") +
                         ylab("LOD Score") 
 oldplot_flr
 
 
+# new map
 new_flr_perm <- scanone(brassica_newmap, pheno.col = 2, method = "imp", n.perm = 10000)
-new_flr_perm_95 <- summary(newmapplotflr_perm)[1] #keep 95%
-summary(newmapplotflr_perm)
+new_flr_perm_95 <- summary(new_flr_perm)[1] #keep 95%
+summary(new_flr_perm)
 # LOD thresholds (10000 permutations)
 #      lod
-# 5%  2.89
-# 10% 2.56
+# 5%  2.87
+# 10% 2.58
 
 newmapplotflr <- scanone(brassica_newmap, pheno.col = 2, method = "imp", chr = "A10")
 plot(newmapplotflr)
@@ -134,8 +135,8 @@ peak2 <- 9
 newplot_flr <- ggplot(newmapplotflr)
 newplot_flr <- newplot_flr +  theme_bw() + scale_y_continuous(limits=c(0, 13)) + 
                         geom_line(aes(x = pos, y = lod), size = 2) +
-                        geom_hline(yintercept = 2.89, color = "red", size = 1) +
-                        geom_segment(aes(x = pos, xend = pos), y = (peak * -0.02), yend = (peak * -0.05)) +
+                        geom_hline(yintercept = 2.87, color = "red", size = 1) +
+                        geom_segment(aes(x = pos, xend = pos), y = (peak2 * -0.02), yend = (peak2 * -0.05)) +
                         theme(text = element_text(size = 20)) +
                         xlab("Genetic Distance (cM)") +
                         ylab("LOD Score") 
@@ -143,8 +144,10 @@ newplot_flr
 
 
 setwd("/Users/Cody_2/git.repos/brassica_genetic_map_paper/output")
-figure_X <- plot_grid(old_map_plot, new_map_plot, oldplot_flr, newplot_flr, labels=c("A", "B", "D", "E"))
-ggsave("genetic_map_qtl_figure.pdf", figure_X)
+figure_X <- plot_grid(old_map_plot, new_map_plot, oldplot_flr, newplot_flr, labels=c("A", "B", "C", "D"))
+figure_X
+?ggsave
+ggsave("genetic_map_qtl_figure.pdf", figure_X, height = 10, width = 15)
 
 draft <- ggdraw(newplot_flr) + draw_plot_label("", size = 14) + 
   draw_text("DRAFT!", angle = 45, size = 100, alpha = .2)
