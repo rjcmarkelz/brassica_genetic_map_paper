@@ -82,6 +82,7 @@ rffull <- pull.rf(b_map_red)
 # A01
 #############
 plot.rf(b_map_red, chr = 'A01')
+plotMap(b_map_red, chr = 'A01')
 rf1 <- pull.rf(b_map_red, chr  =  'A01')
 chr1 <- markernames(b_map_red, chr = 'A01')
 chr1
@@ -103,56 +104,6 @@ write.cross(b_map_red, format= "csvsr", filestem="snp_map_rqtl_Mbp_ref1.5_cross_
 plotMap(b_map_red) 
 plot.rf(b_map_red)
 
-
-
-#############
-# A08 
-#############
-plot.rf(b_map_red, chr = 'A08')
-rf8 <- pull.rf(b_map_red, chr = 'A08')
-chr8 <- markernames(b_map_red, chr = 'A08')
-chr8
-#plotting is the easiest
-
-# these markers belong near the other end 
-plot(rf8, chr8[5], bandcol="gray70", ylim=c(0,1), alternate.chrid=TRUE)
-plot(rf8, chr8[6], bandcol="gray70", ylim=c(0,1), alternate.chrid=TRUE)
-out <- plot(rf8, chr8[5], bandcol="gray70", ylim=c(0,1), alternate.chrid=TRUE)
-out # need to think about if I want to place these
-
-setseed(1234)
-# a few ripples
-b_map_red <- orderMarkers(b_map_red, chr = c('A08'), 
-	                        window = 5, use.ripple = TRUE, maxit = 4000, 
-	                        error.prob = 0.0001)
-plotMap(b_map_red, chr ='A08') 
-plot.rf(b_map_red, chr = 'A08')
-rf8 <- pull.rf(b_map_red, chr = 'A08')
-chr8 <- markernames(b_map_red, chr = 'A08')
-chr8
-
-# take a look at total map
-plotMap(b_map_red)
-
-#############
-# A05
-#############
-plot.rf(b_map_red, chr='A05')
-rf5 <- pull.rf(b_map_red, chr = 'A05')
-chr5 <- markernames(b_map_red, chr='A05')
-chr5
-
-set.seed(1256) # initial seed set
-# running ripple a 3 times gets to final output
-b_map_red <- orderMarkers(b_map_red, chr = c('A05'), 
-	                        window = 5, use.ripple = TRUE, maxit = 4000, 
-	                        error.prob = 0.0001)
-plotMap(b_map_red, chr = 'A05') 
-plot.rf(b_map_red, chr = 'A05')
-
-# find the next target
-plotMap(b_map_red)
-
 #############
 # A02
 #############
@@ -169,8 +120,116 @@ b_map_red <- orderMarkers(b_map_red, chr = c('A02'),
 plotMap(b_map_red, chr = 'A02') 
 plot.rf(b_map_red, chr = 'A02')
 
+#############
+# A03
+#############
+plot.rf(b_map_red, chr = 'A03')
+rf3 <- pull.rf(b_map_red, chr  =  'A03')
+chr3 <- markernames(b_map_red, chr = 'A03')
+chr3
 
+set.seed(1465) 
+# ripple a few times and everthing looks good
+b_map_red <- orderMarkers(b_map_red, chr = c('A03'), 
+	                        window = 5, use.ripple = TRUE, maxit = 4000, 
+	                        error.prob = 0.0001)
+plotMap(b_map_red, chr = 'A03') 
+plot.rf(b_map_red, chr = 'A03')
 
+#############
+# A04
+#############
+plot.rf(b_map_red, chr = 'A04')
+rf4 <- pull.rf(b_map_red, chr  =  'A04')
+chr4 <- markernames(b_map_red, chr = 'A04')
+chr4
+
+# ripple a few times
+b_map_red <- orderMarkers(b_map_red, chr = c('A04'), 
+	                        window = 5, use.ripple = TRUE, maxit = 4000, 
+	                        error.prob = 0.0001)
+plotMap(b_map_red, chr = 'A04') 
+plot.rf(b_map_red, chr = 'A04')
+
+# save output progress
+setwd("/Users/Cody_2/git.repos/brassica_genetic_map_paper/Output")
+write.cross(b_map_red, format= "csvsr", filestem="snp_map_rqtl_Mbp_ref1.5_cross_output")
+
+#############
+# A05
+#############
+plot.rf(b_map_red, chr='A05')
+rf5 <- pull.rf(b_map_red, chr = 'A05')
+chr5 <- markernames(b_map_red, chr='A05')
+chr5
+
+# running ripple a 3 times gets to final output
+b_map_red <- orderMarkers(b_map_red, chr = c('A05'), 
+	                        window = 5, use.ripple = TRUE, maxit = 4000, 
+	                        error.prob = 0.0001)
+plotMap(b_map_red, chr = 'A05') 
+plot.rf(b_map_red, chr = 'A05')
+
+# find the next target
+plotMap(b_map_red)
+
+#############
+# A06
+#############
+plot.rf(b_map_red, chr='A06')
+rf6 <- pull.rf(b_map_red, chr = 'A06')
+chr6 <- markernames(b_map_red, chr='A06')
+chr6
+
+b_map_red <- orderMarkers(b_map_red, chr = c('A06'), 
+	                        window = 5, use.ripple = TRUE, maxit = 4000, 
+	                        error.prob = 0.0001)
+plotMap(b_map_red, chr = 'A06') 
+plot.rf(b_map_red, chr = 'A06')
+
+# save output progress
+setwd("/Users/Cody_2/git.repos/brassica_genetic_map_paper/Output")
+write.cross(b_map_red, format= "csvsr", filestem="snp_map_rqtl_Mbp_ref1.5_cross_output")
+
+#############
+# A07
+#############
+plot.rf(b_map_red, chr='A07')
+rf7 <- pull.rf(b_map_red, chr = 'A07')
+chr7 <- markernames(b_map_red, chr='A07')
+chr7
+
+b_map_red <- orderMarkers(b_map_red, chr = c('A07'), 
+	                        window = 5, use.ripple = TRUE, maxit = 4000, 
+	                        error.prob = 0.0001)
+plotMap(b_map_red, chr = 'A07') 
+plot.rf(b_map_red, chr = 'A07')
+
+# save output progress
+setwd("/Users/Cody_2/git.repos/brassica_genetic_map_paper/Output")
+write.cross(b_map_red, format= "csvsr", filestem="snp_map_rqtl_Mbp_ref1.5_cross_output")
+
+#############
+# A08 
+#############
+plot.rf(b_map_red, chr = 'A08')
+rf8 <- pull.rf(b_map_red, chr = 'A08')
+chr8 <- markernames(b_map_red, chr = 'A08')
+chr8
+
+# a few ripples
+b_map_red <- orderMarkers(b_map_red, chr = c('A08'), 
+	                        window = 5, use.ripple = TRUE, maxit = 4000, 
+	                        error.prob = 0.0001)
+plotMap(b_map_red, chr ='A08') 
+plot.rf(b_map_red, chr = 'A08')
+rf8 <- pull.rf(b_map_red, chr = 'A08')
+chr8 <- markernames(b_map_red, chr = 'A08')
+chr8
+
+# save output progress
+setwd("/Users/Cody_2/git.repos/brassica_genetic_map_paper/Output")
+write.cross(b_map_red, format= "csvsr", filestem="snp_map_rqtl_Mbp_ref1.5_cross_output")
 
 #############
 # A09 
@@ -202,59 +261,19 @@ plot.rf(b_map_red, chr = 'A10')
 setwd("/Users/Cody_2/git.repos/brassica_genetic_map_paper/Output")
 write.cross(b_map_red, format= "csvsr", filestem = "snp_map_rqtl_Mbp_ref1.5_cross_output")
 
-
-
-##########################
-##########################
-# Fine tuning
-##########################
-##########################
 summaryMap(b_map_red)
 #         n.mar length ave.spacing max.spacing
-# A01       163   94.0         0.6         3.1
-# A02       119  121.3         1.0        36.6
+# A01       170  103.2         0.6         3.6
+# A02       123  121.0         1.0        36.6
 # A03       207  135.6         0.7         4.6
-# A04       100   63.3         0.6         2.1
-# A05        84   91.1         1.1        26.3
-# A06       158   93.9         0.6         2.9
-# A07       160  106.4         0.7         3.1
-# A08        77   80.7         1.1        29.1
-# A09       216  154.7         0.7        14.5
-# A10       167  104.1         0.6         2.5
-# overall  1451 1045.0         0.7        36.6
-
-
-
-#############
-# Back to A08
-#############
-plot.rf(b_map_red, chr='A08')
-rf8 <- pull.rf(b_map_red, chr = 'A08')
-chr8 <- markernames(b_map_red, chr='A08')
-chr8
-set.seed(1234)
-b_map_red <- orderMarkers(b_map_red, chr=c('A08'), 
-	                        window=2, use.ripple = FALSE, maxit=4000, 
-	                        error.prob=0.0001)
-plotMap(b_map_red, chr='A08') 
-plot.rf(b_map_red, chr='A08')
-
-
-#############
-# Back to A05
-#############
-rf5 <- pull.rf(b_map_red, chr = 'A05')
-chr5 <- markernames(b_map_red, chr='A05')
-chr5
-plot.rf(b_map_red, chr='A05')
-plotMap(b_map_red, chr='A05') 
-
-set.seed(1234)
-b_map_red <- orderMarkers(b_map_red, chr=c('A05'), 
-	                        window=2, use.ripple = FALSE, maxit=4000, 
-	                        error.prob=0.0001)
-plotMap(b_map_red, chr='A05') 
-plot.rf(b_map_red, chr='A05')
+# A04       102   63.6         0.6         2.1
+# A05        87   91.0         1.1        26.3
+# A06       159   93.9         0.6         2.9
+# A07       163  106.3         0.7         3.1
+# A08        81   80.5         1.0        29.1
+# A09       220  153.0         0.7        13.7
+# A10       170  104.0         0.6         2.5
+# overall  1482 1052.2         0.7        36.6
 
 
 # final plots
@@ -263,81 +282,84 @@ plot.rf(b_map_red)
 
 # do the marker orders make sense?
 chr1 <- markernames(b_map_red, chr='A01')
-chr1 # reverse marker order
+chr1 # okay
 
 chr2 <- markernames(b_map_red, chr='A02')
-chr2 # reverse marker order
+chr2 # okay
 
 chr3 <- markernames(b_map_red, chr='A03')
 chr3 # okay
 
 chr4 <- markernames(b_map_red, chr='A04')
-chr4 # okay
+chr4 # reverse marker order
 
 chr5 <- markernames(b_map_red, chr='A05')
 chr5 # okay
 
 chr6 <- markernames(b_map_red, chr='A06')
-chr6 # okay
+chr6 # reverse marker order
 
 chr7 <- markernames(b_map_red, chr='A07')
-chr7 # okay
+chr7 # reverse marker order
 
 chr8 <- markernames(b_map_red, chr='A08')
-chr8 # reverse marker order
+chr8 # okay
 
 chr9 <- markernames(b_map_red, chr='A09')
-chr9 # reorder within, or potential inversion?
-# 37 - 52
+chr9 # reverse marker order
 
 chr10 <- markernames(b_map_red, chr='A10')
-chr10 # reverse marker order, potential inversion?
+chr10 # reverse marker order
 
-# reorder if necessary
-chr1 <- markernames(b_map_red, chr='A01')
-chr1 <- rev(chr1)
-chr1
+############
+# reverse A04, A06, A07, A09, A10
+############
 
-b_map_red <- switch.order(b_map_red, chr = "A01", order = chr1)
-markernames(b_map_red, chr='A01')
+# A04
+chr4 <- markernames(b_map_red, chr='A04')
+chr4 <- rev(chr4)
+chr4
 
-plotMap(b_map_red, chr='A01') 
-plot.rf(b_map_red, chr='A01')
+b_map_red <- switch.order(b_map_red, chr = "A04", order = chr4)
+markernames(b_map_red, chr='A04')
 
-chr2 <- markernames(b_map_red, chr='A02')
-chr2 <- rev(chr2)
-chr2
+plotMap(b_map_red, chr='A04') 
+plot.rf(b_map_red, chr='A04')
 
-b_map_red <- switch.order(b_map_red, chr = "A02", order = chr2)
-markernames(b_map_red, chr='A02')
+# A06
+chr6 <- markernames(b_map_red, chr='A06')
+chr6 <- rev(chr6)
+chr6
 
-plotMap(b_map_red, chr='A02') 
-plot.rf(b_map_red, chr='A02')
+b_map_red <- switch.order(b_map_red, chr = "A06", order = chr6)
+markernames(b_map_red, chr='A06')
 
-chr8 <- markernames(b_map_red, chr='A08')
-chr8 <- rev(chr8)
-chr8
+plotMap(b_map_red, chr='A06') 
+plot.rf(b_map_red, chr='A06')
 
-b_map_red <- switch.order(b_map_red, chr = "A08", order = chr8)
-markernames(b_map_red, chr='A08')
+# A07
+chr7 <- markernames(b_map_red, chr='A07')
+chr7 <- rev(chr7)
+chr7
 
-plotMap(b_map_red, chr='A08') 
-plot.rf(b_map_red, chr='A08')
+b_map_red <- switch.order(b_map_red, chr = "A07", order = chr7)
+markernames(b_map_red, chr='A07')
 
+plotMap(b_map_red, chr='A07') 
+plot.rf(b_map_red, chr='A07')
 
+# A09
 chr9 <- markernames(b_map_red, chr='A09')
+chr9 <- rev(chr9)
 chr9 
-chr9[37:52] <- rev(chr9[37:52])
-chr9
 
 b_map_red <- switch.order(b_map_red, chr = "A09", order = chr9)
 markernames(b_map_red, chr='A09')
 
 plotMap(b_map_red, chr='A09') 
 plot.rf(b_map_red, chr='A09')
-b_map_red <- est.rf(b_map_red)
 
-
+# A10
 chr10 <- markernames(b_map_red, chr='A10')
 chr10 <- rev(chr10)
 chr10
@@ -350,12 +372,13 @@ plot.rf(b_map_red, chr='A10')
 
 # make sure all start at 0 cM
 b_map_red <- shiftmap(b_map_red)
-
+b_map_red
 # save output
 setwd("/Users/Cody_2/git.repos/brassica_genetic_map_paper/Output")
 write.cross(b_map_red, format= "csvsr", filestem="snp_map_rqtl_Mbp_ref1.5_cross_output")
 
 # final checks and save files
+dev.new()
 pdf('plotMap_new_output.pdf')
 plotMap(b_map_red) 
 
