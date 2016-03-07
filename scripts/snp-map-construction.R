@@ -1,10 +1,8 @@
-# Following Karl Broman's Guide Here: LINK
-
-
-
 ###
 ### Create genetic map
 ###
+### Last updated March 6, 2016
+### With fixed marker order, 
 
 library(qtl)
 setwd("/Users/Cody_2/git.repos/brassica_genetic_map_paper/input")
@@ -25,34 +23,35 @@ b_map
 # takes about a minute to estimate the map
 newmap <- est.map(b_map, error.prob= 0.0005)
 summaryMap(newmap)
-#         n.mar  length ave.spacing max.spacing
-# A01       175  7171.3        41.2       966.8
-# A02       125  3169.3        25.6       966.8
-# A03       216   135.6         0.6         4.6
-# A04       106    63.2         0.6         2.1
-# A05        91  2384.6        26.5       966.8
-# A06       168    93.9         0.6         2.9
-# A07       166   489.5         3.0       139.9
-# A08        84  2127.3        25.6       966.8
-# A09       224   175.5         0.8        14.4
-# A10       172   121.4         0.7        21.2
-# overall  1527 15931.6        10.5       966.8
+#         n.mar length ave.spacing max.spacing
+# A01       175  387.2         2.2       276.4
+# A02       125 1236.6        10.0       966.8
+# A03       216  135.6         0.6         4.6
+# A04       107  110.1         1.0        46.8
+# A05        88  270.0         3.1       178.5
+# A06       169  166.4         1.0        37.5
+# A07       165  125.1         0.8        11.0
+# A08        81  262.8         3.3       137.7
+# A09       224  325.8         1.5        49.6
+# A10       172  121.4         0.7        21.2
+# overall  1522 3140.9         2.1       966.8
 
-plotMap(newmap) 
-plot.rf(b_map)  
+
+plotMap(newmap) # saved as genetic_map_no_rearrangement
+plot.rf(b_map)  # saved as recombination_heat_map_no_rearrangement
 
 #find potential duplicates and drop them
 dup <- findDupMarkers(b_map, exact.only = FALSE)
 head(dup)
 length(dup)
-# 57
+# 40
 
 totmar(b_map)
-# 1527
+# 1522
 
 b_map <- drop.markers(b_map, unlist(dup))
 totmar(b_map)
-# 1465
+# 1482
 
 #identify markers with possible segregation distortion
 gt <- geno.table(b_map)
@@ -74,15 +73,40 @@ plotMap(newmap) # saved _2
 b_map <- replace.map(b_map, newmap)
 plot.rf(b_map) # saved _2
 
-
-
 # now remove markers that obviously do not belong
 # make a copy so I can go back and not have to reestimate the map
 b_map_red <- b_map
 rffull <- pull.rf(b_map_red)
 
 #############
-# warm up with A08
+# A01
+#############
+plot.rf(b_map_red, chr = 'A01')
+rf1 <- pull.rf(b_map_red, chr  =  'A01')
+chr1 <- markernames(b_map_red, chr = 'A01')
+chr1
+
+# ripple to save one state, and then ripple again to clean up
+set.seed(163234)
+# ripple four times, looks great
+b_map_red <- orderMarkers(b_map_red, chr = c('A01'), 
+	                        window = 2, use.ripple = FALSE, maxit = 4000, 
+	                        error.prob = 0.0001)
+plotMap(b_map_red, chr = 'A01') 
+
+plot.rf(b_map_red, chr = 'A01')
+
+# save output progress
+setwd("/Users/Cody_2/git.repos/brassica_genetic_map_paper/Output")
+write.cross(b_map_red, format= "csvsr", filestem="snp_map_rqtl_Mbp_ref1.5_cross_output")
+
+plotMap(b_map_red) 
+plot.rf(b_map_red)
+
+
+
+#############
+# A08 
 #############
 plot.rf(b_map_red, chr = 'A08')
 rf8 <- pull.rf(b_map_red, chr = 'A08')
@@ -90,19 +114,14 @@ chr8 <- markernames(b_map_red, chr = 'A08')
 chr8
 #plotting is the easiest
 
-plot(rf8, chr8[7], bandcol="gray70", ylim=c(0,1), alternate.chrid=TRUE)
-plot(rf8, chr8[8], bandcol="gray70", ylim=c(0,1), alternate.chrid=TRUE)
+# these markers belong near the other end 
+plot(rf8, chr8[5], bandcol="gray70", ylim=c(0,1), alternate.chrid=TRUE)
+plot(rf8, chr8[6], bandcol="gray70", ylim=c(0,1), alternate.chrid=TRUE)
+out <- plot(rf8, chr8[5], bandcol="gray70", ylim=c(0,1), alternate.chrid=TRUE)
+out # need to think about if I want to place these
 
-#problem markers are 7 and 8
-plot(rf8, chr8[9], bandcol="gray70", ylim=c(0,1), alternate.chrid=TRUE)
-plot(rf8, chr8[30], bandcol="gray70", ylim=c(0,1), alternate.chrid=TRUE)
-
-#remove 7 and 8, could also belong on chromosome 9 see plots below
-plot(rffull, chr8[7], bandcol="gray70", ylim=c(0,1), alternate.chrid=TRUE)
-plot(rffull, chr8[8], bandcol="gray70", ylim=c(0,1), alternate.chrid=TRUE)
-b_map_red <- drop.markers(b_map_red, c("A08x4875175",  "A08x4952134"))
-
-
+setseed(1234)
+# a few ripples
 b_map_red <- orderMarkers(b_map_red, chr = c('A08'), 
 	                        window = 5, use.ripple = TRUE, maxit = 4000, 
 	                        error.prob = 0.0001)
@@ -112,54 +131,19 @@ rf8 <- pull.rf(b_map_red, chr = 'A08')
 chr8 <- markernames(b_map_red, chr = 'A08')
 chr8
 
-#still something funny
-plot(rffull, chr8[1], bandcol = "gray70", ylim = c(0,1), alternate.chrid = TRUE)
-plot(rffull, chr8[2], bandcol = "gray70", ylim = c(0,1), alternate.chrid = TRUE)
-plot(rffull, chr8[3], bandcol = "gray70", ylim = c(0,1), alternate.chrid = TRUE)
-# markers "A08x1515279"  "A08x1485026" may belong on chromosome 2
-
-b_map_red <- drop.markers(b_map_red, c("A08x1515279",  "A08x1485026"))
-
-setseed(1234)
-b_map_red <- orderMarkers(b_map_red, chr = c('A08'), 
-	                        window = 5, use.ripple = TRUE, maxit = 4000, 
-	                        error.prob = 0.0001)
-plotMap(b_map_red, chr = 'A08') 
-plot.rf(b_map_red, chr = 'A08')
-
-
 # take a look at total map
 plotMap(b_map_red)
 
 #############
-# Onto A05
+# A05
 #############
 plot.rf(b_map_red, chr='A05')
 rf5 <- pull.rf(b_map_red, chr = 'A05')
 chr5 <- markernames(b_map_red, chr='A05')
 chr5
 
-plot(rf5, chr5[22], bandcol = "gray70", ylim = c(0,1), alternate.chrid = TRUE)
-plot(rf5, chr5[23], bandcol = "gray70", ylim = c(0,1), alternate.chrid = TRUE)
-plot(rf5, chr5[24], bandcol = "gray70", ylim = c(0,1), alternate.chrid = TRUE)
-plot(rf5, chr5[25], bandcol = "gray70", ylim = c(0,1), alternate.chrid = TRUE)
-plot(rf5, chr5[26], bandcol = "gray70", ylim = c(0,1), alternate.chrid = TRUE)
-plot(rf5, chr5[27], bandcol = "gray70", ylim = c(0,1), alternate.chrid = TRUE)
-plot(rf5, chr5[28], bandcol = "gray70", ylim = c(0,1), alternate.chrid = TRUE)
-
-plot(rffull, chr5[22], bandcol = "gray70", ylim = c(0,1), alternate.chrid = TRUE)
-plot(rffull, chr5[23], bandcol = "gray70", ylim = c(0,1), alternate.chrid = TRUE)
-
-plot(rffull, chr5[24], bandcol = "gray70", ylim = c(0,1), alternate.chrid = TRUE)
-plot(rffull, chr5[25], bandcol = "gray70", ylim = c(0,1), alternate.chrid = TRUE)
-plot(rffull, chr5[26], bandcol = "gray70", ylim = c(0,1), alternate.chrid = TRUE)
-plot(rffull, chr5[27], bandcol = "gray70", ylim = c(0,1), alternate.chrid = TRUE)
-
-# this batch of bad markers belongs on chr A08
-# "A05x8149908" "A05x8245839"  "A05x8277002"  "A05x8327143"
-b_map_red <- drop.markers(b_map_red, c("A05x8149908", "A05x8245839",  "A05x8277002",  "A05x8327143"))
-
-set.seed(1256)
+set.seed(1256) # initial seed set
+# running ripple a 3 times gets to final output
 b_map_red <- orderMarkers(b_map_red, chr = c('A05'), 
 	                        window = 5, use.ripple = TRUE, maxit = 4000, 
 	                        error.prob = 0.0001)
@@ -176,135 +160,49 @@ plot.rf(b_map_red, chr = 'A02')
 rf2 <- pull.rf(b_map_red, chr  =  'A02')
 chr2 <- markernames(b_map_red, chr = 'A02')
 chr2
-# marker "A02x21152172" is strange and belongs on A06
-plot(rf2, chr2[76], bandcol = "gray70", ylim = c(0,1), alternate.chrid = TRUE)
-plot(rf2, chr2[77], bandcol = "gray70", ylim = c(0,1), alternate.chrid = TRUE)
-plot(rf2, chr2[78], bandcol = "gray70", ylim = c(0,1), alternate.chrid = TRUE)
-plot(rf2, chr2[79], bandcol = "gray70", ylim = c(0,1), alternate.chrid = TRUE)
 
-plot(rffull, chr2[78], bandcol = "gray70", ylim = c(0,1), alternate.chrid = TRUE)
-
-# marker "A02x23373611" is strange and belongs on chromosome A10
-plot(rf2, chr2[91], bandcol = "gray70", ylim = c(0,1), alternate.chrid = TRUE)
-plot(rf2, chr2[92], bandcol = "gray70", ylim = c(0,1), alternate.chrid = TRUE)
-plot(rf2, chr2[93], bandcol = "gray70", ylim = c(0,1), alternate.chrid = TRUE)
-
-plot(rffull, chr2[93], bandcol = "gray70", ylim = c(0,1), alternate.chrid = TRUE)
-
-b_map_red <- drop.markers(b_map_red, c("A02x21152172", "A02x23373611"))
-
-# may need to come back to 2, it is still really large ~200 cM
-set.seed(1465)
+set.seed(1465) 
+# ripple a few times and everthing looks good
 b_map_red <- orderMarkers(b_map_red, chr = c('A02'), 
 	                        window = 5, use.ripple = TRUE, maxit = 4000, 
 	                        error.prob = 0.0001)
 plotMap(b_map_red, chr = 'A02') 
 plot.rf(b_map_red, chr = 'A02')
 
-plot.rf(b_map_red, chr='A02')
 
-rffull <- pull.rf(b_map_red)
-rf2 <- pull.rf(b_map_red, chr = 'A02')
-chr2 <- markernames(b_map_red, chr = 'A02')
-chr2
-
-plot(rf2, chr2[20], bandcol = "gray70", ylim = c(0,1), alternate.chrid = TRUE)
-plot(rffull, chr2[70], bandcol = "gray70", ylim = c(0,1), alternate.chrid = TRUE)
-
-# just needed to reorder the markers on the top of A02
-set.seed(165)
-b_map_red <- orderMarkers(b_map_red, chr = c('A02'), 
-	                        window = 2,  maxit = 4000, 
-	                        error.prob = 0.0001)
-plotMap(b_map_red, chr = 'A02') 
-plot.rf(b_map_red, chr = 'A02')
 
 
 #############
-# A01
-#############
-plot.rf(b_map_red, chr = 'A01')
-rf1 <- pull.rf(b_map_red, chr  =  'A01')
-chr1 <- markernames(b_map_red, chr = 'A01')
-chr1
-
-# marker "A01x8900522" belongs on A09
-plot(rf1, chr1[58], bandcol = "gray70", ylim = c(0,1), alternate.chrid = TRUE)
-plot(rf1, chr1[59], bandcol = "gray70", ylim = c(0,1), alternate.chrid = TRUE)
-plot(rffull, chr1[58], bandcol = "gray70", ylim = c(0,1), alternate.chrid = TRUE)
-
-# marker "A01x10301489" belongs on A07
-plot(rf1, chr1[79], bandcol = "gray70", ylim = c(0,1), alternate.chrid = TRUE)
-plot(rffull, chr1[79], bandcol = "gray70", ylim = c(0,1), alternate.chrid = TRUE)
-
-# marker "A01x11450244" belongs on A04
-plot(rf1, chr1[84], bandcol = "gray70", ylim = c(0,1), alternate.chrid = TRUE)
-plot(rffull, chr1[84], bandcol = "gray70", ylim = c(0,1), alternate.chrid = TRUE)
-
-# marker "A01x16479326" belongs on A02
-plot(rf1, chr1[92], bandcol = "gray70", ylim = c(0,1), alternate.chrid = TRUE)
-plot(rffull, chr1[92], bandcol = "gray70", ylim = c(0,1), alternate.chrid = TRUE)
-
-b_map_red <- drop.markers(b_map_red, c("A01x8900522", "A01x10301489", "A01x11450244", "A01x16479326"))
-
-# need to run twice with same seed to reproduce marker order
-# ripple to save one state, and then ripple again to clean up
-set.seed(163234)
-?orderMarkers
-b_map_red <- orderMarkers(b_map_red, chr = c('A01'), 
-	                        window = 2, use.ripple = FALSE, maxit = 4000, 
-	                        error.prob = 0.0001)
-plotMap(b_map_red, chr = 'A01') 
-
-plot.rf(b_map_red, chr = 'A01')
-
-# save output progress
-setwd("/Users/Cody_2/git.repos/brassica_genetic_map_paper/Output")
-write.cross(b_map_red, format= "csvsr", filestem="snp_map_rqtl_Mbp_ref1.5_cross_output")
-
-plotMap(b_map_red) 
-plot.rf(b_map_red)
-
-
-#############
-# A09 ripple marker order
+# A09 
 #############
 plotMap(b_map_red, chr = 'A09') 
 plot.rf(b_map_red, chr = 'A09')
 
-set.seed(16374)
+#ripple a few times
 b_map_red <- orderMarkers(b_map_red, chr = c('A09'), 
 	                        window = 2, use.ripple = TRUE, maxit = 4000, 
 	                        error.prob = 0.0001)
-
-plotMap(b_map_red, chr = 'A09') 
-plot.rf(b_map_red, chr = 'A09')
-
-set.seed(16374)
-b_map_red <- orderMarkers(b_map_red, chr = c('A09'), 
-	                        window = 2, use.ripple = TRUE, maxit = 4000, 
-	                        error.prob = 0.0001)
-
 plotMap(b_map_red, chr = 'A09') 
 plot.rf(b_map_red, chr = 'A09')
 
 #############
-# A10 ripple marker order
+# A10 
 #############
 plotMap(b_map_red, chr='A10') 
 plot.rf(b_map_red, chr = 'A10')
 
-set.seed(163778)
+# ripple marker 
 b_map_red <- orderMarkers(b_map_red, chr = c('A10'), 
 	                        window = 2, use.ripple = TRUE, maxit = 4000, 
 	                        error.prob = 0.0001)
-
 plotMap(b_map_red, chr='A10') 
 plot.rf(b_map_red, chr = 'A10')
 
 # save output progress
 setwd("/Users/Cody_2/git.repos/brassica_genetic_map_paper/Output")
 write.cross(b_map_red, format= "csvsr", filestem = "snp_map_rqtl_Mbp_ref1.5_cross_output")
+
+
 
 ##########################
 ##########################
