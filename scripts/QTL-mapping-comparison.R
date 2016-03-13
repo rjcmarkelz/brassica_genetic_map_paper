@@ -202,10 +202,13 @@ newplot_map <- newplot_map +  theme_bw() + scale_y_continuous(limits=c(0, 7.5)) 
                         xlab("Genetic Distance (cM)") +
                         ylab("LOD Score") 
 newplot_map
+ggsave("leaf_length_figure.pdf", newplot_map, height = 10, width = 15)
 
+leaf_cim <- cim(brassica_newmap, pheno.col = 1)
+leaf_cim
+plot(leaf_cim, chr = "A06")
 
-
-
-
-
+flr_cim <- cim(brassica_newmap, pheno.col = 2)
+flr_cim
+plot(flr_cim)
 
