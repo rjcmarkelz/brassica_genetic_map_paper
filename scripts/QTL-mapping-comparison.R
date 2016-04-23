@@ -206,9 +206,14 @@ ggsave("leaf_length_figure.pdf", newplot_map, height = 10, width = 15)
 
 leaf_cim <- cim(brassica_newmap, pheno.col = 1)
 leaf_cim
+plot(leaf_cim)
 plot(leaf_cim, chr = "A06")
+plot(leaf_cim, chr = "A10")
+
 
 flr_cim <- cim(brassica_newmap, pheno.col = 2)
 flr_cim
 plot(flr_cim)
-
+plot(flr_cim, chr = "A03")
+plot(flr_cim, chr = "A07")
+plot(flr_cim, chr = "A10")
