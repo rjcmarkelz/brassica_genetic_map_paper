@@ -147,6 +147,7 @@ setwd("/Users/Cody_2/git.repos/brassica_genetic_map_paper/output")
 figure_X <- plot_grid(old_map_plot, new_map_plot, oldplot_flr, newplot_flr, labels=c("A", "B", "C", "D"))
 figure_X
 ?ggsave
+ggsave("genetic-map-qtl-figure.png", figure_X, height = 10, width = 15)
 ggsave("genetic_map_qtl_figure.pdf", figure_X, height = 10, width = 15)
 
 # draft <- ggdraw(newplot_flr) + draw_plot_label("", size = 14) + 
