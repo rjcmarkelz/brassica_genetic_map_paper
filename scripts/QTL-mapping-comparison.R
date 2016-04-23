@@ -104,8 +104,8 @@ old_flr_perm_95 <- summary(old_flr_perm)[1] #keep 95%
 summary(old_flr_perm)
 # LOD thresholds (10000 permutations)
 #      lod
-# 5%  2.66
-# 10% 2.35
+# 5%  2.70
+# 10% 2.37
 oldmapplotflr <- scanone(brassica_traits, pheno.col = 2, method = "imp", chr = "A10")
 plot(oldmapplotflr)
 peak2 <- 9
@@ -126,8 +126,8 @@ new_flr_perm_95 <- summary(new_flr_perm)[1] #keep 95%
 summary(new_flr_perm)
 # LOD thresholds (10000 permutations)
 #      lod
-# 5%  2.87
-# 10% 2.58
+# 5%  2.89
+# 10% 2.56
 
 newmapplotflr <- scanone(brassica_newmap, pheno.col = 2, method = "imp", chr = "A10")
 plot(newmapplotflr)
@@ -149,10 +149,10 @@ figure_X
 ?ggsave
 ggsave("genetic_map_qtl_figure.pdf", figure_X, height = 10, width = 15)
 
-draft <- ggdraw(newplot_flr) + draw_plot_label("", size = 14) + 
-  draw_text("DRAFT!", angle = 45, size = 100, alpha = .2)
-draft
-ggsave("draft_figure.pdf", draft)
+# draft <- ggdraw(newplot_flr) + draw_plot_label("", size = 14) + 
+#   draw_text("DRAFT!", angle = 45, size = 100, alpha = .2)
+# draft
+# ggsave("draft_figure.pdf", draft)
 
 
 #############
@@ -193,15 +193,15 @@ newmapplotleaf <- scanone(brassica_newmap, pheno.col = 1, method = "imp", chr = 
 plot(newmapplotleaf)
 
 peak2 <- 7
-newplot_map <- ggplot(newmapplotleaf)
-newplot_map <- newplot_map +  theme_bw() + scale_y_continuous(limits=c(0, 7.5)) + 
+newplot_leaf <- ggplot(newmapplotleaf)
+newplot_leaf <- newplot_leaf +  theme_bw() + scale_y_continuous(limits=c(0, 7.5)) + 
                         geom_line(aes(x = pos, y = lod), size = 2) +
                         geom_hline(yintercept = 3.08, color = "red", size = 1) +
                         geom_segment(aes(x = pos, xend = pos), y = (peak * -0.02), yend = (peak * -0.05)) +
                         theme(text = element_text(size = 20)) +
                         xlab("Genetic Distance (cM)") +
                         ylab("LOD Score") 
-newplot_map
+newplot_leaf
 ggsave("leaf_length_figure.pdf", newplot_map, height = 10, width = 15)
 
 leaf_cim <- cim(brassica_newmap, pheno.col = 1)
