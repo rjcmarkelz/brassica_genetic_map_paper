@@ -13,7 +13,8 @@ dim(snpmap)
 head(snpmap)
 # head(snpmap2) # double checking against other formatting
 tail(snpmap)
-
+snpmap$comment
+snpmap[,2:6]
 # idx chr idx.orig chr.orig bin.mid bin.start bin.end RIL_1 RIL_103 RIL_104 RIL_113 RIL_115
 # 1   1 A01        1      A01 3323536   3188282 3379775  R500    R500    R500  IMB211  IMB211
 # 2   2 A01        2      A01 3444783   3423574 3469723  R500    R500    R500  IMB211  IMB211
