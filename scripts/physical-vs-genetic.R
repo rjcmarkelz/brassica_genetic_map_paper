@@ -178,7 +178,47 @@ A10_plot <- A10_plot + geom_point(shape=1) + facet_grid(chr ~ . )
 A10_plot <- A10_plot + xlab("Genetic Position (cM)") + ylab("Physical Position (Mbp)")
 A10_plot
 ggsave("A10_genetic_vs_physical_v2.3.pdf")
-# end
 
+# splines
+# head(v2.3_A03)
+# ?smooth.spline
+# A03_smooth <- smooth.spline(v2.3_A03$pos, v2.3_A03$genomic_pos)
+# plot(A03_smooth)
+plot(v2.3_A03$pos ~ v2.3_A03$genomic_pos)
+lines(predict(A03_smooth ), col='red', lwd=2)
 
+lines(A03_smooth, col = "blue")
+lines(smooth.spline(v2.3_A03$pos, v2.3_A03$genomic_pos, df = 1), lty = 2, col = "red")
+str(A03_smooth)
 
+plot(A03_smooth$fit$coef)# end
+?lines
+out <- plot.formula(A03_smooth)
+out
+
+x <- 1:10
+y <- c(2,4,6,8,7,12,14,16,18,20)
+lo <- loess(y~x)
+plot(x,y)
+lines(predict(lo), col='red', lwd=2)
+predict(lo)
+lo
+?geom_smooth
+?loess
+A03_smooth <- smooth.spline(v2.3_A03$pos ~ v2.3_A03$genomic_pos)
+plot(v2.3_A03$pos, v2.3_A03$genomic_pos)
+lines(A03_smooth, col='red', lwd=2)
+
+str(A03_smooth)
+cars.lo <- loess(dist ~ speed, cars)
+predict(cars.lo, data.frame(speed = seq(5, 30, 1)), se = TRUE)
+# A03_smooth <- loess(v2.3_A03$pos, v2.3_A03$genomic_pos)
+# v2.3_A03$smooth <- predict(A03_smooth)
+# v2.3_A03$genomic_pos <- as.numeric(v2.3_A03$genomic_pos)
+# A03_plot <- ggplot(v2.3_A03, aes(x=pos, y=genomic_pos)) 
+# A03_plot <- A03_plot + geom_point(shape=1) + facet_grid(chr ~ . ) 
+# A03_plot <- A03_plot + xlab("Genetic Position (cM)") + ylab("Physical Position (Mbp)")
+# A03_plot <- A03_plot + geom_smooth(method = "loess")
+# A03_plot
+# ggsave("A10_genetic_vs_physical_v2.3.pdf")
+#end
