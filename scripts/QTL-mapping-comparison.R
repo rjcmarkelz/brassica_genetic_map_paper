@@ -13,14 +13,14 @@ head(brassica_traits)
 class(brassica_traits)[1] <- "riself"
 brassica_traits <- jittermap(brassica_traits)
 brassica_traits
-newmap <- est.map(brassica_traits,verbose=T,error.prob=.01)
+oldmap <- est.map(brassica_traits,verbose=T,error.prob=.01)
 
 pairs(jitter( as.matrix(brassica_traits$pheno) ), cex=0.6, las=1)
 
-plot.map(brassica_traits,newmap) #some compression in this brassica_traits set
+plot.map(brassica_traits,oldmap) #some compression in this brassica_traits set
 brassica_traits
 
-brassica_traits <- replace.map(brassica_traits,newmap) #use new map
+brassica_traits <- replace.map(brassica_traits,oldmap) #use old map
 plot(brassica_traits) 
 brassica_traits
 plot.map(brassica_traits)
@@ -31,8 +31,22 @@ str(brassica_traits)
 names(brassica_traits$geno) <- paste(c("A01", "A02", "A03", "A04", "A05", "A06", "A07", "A08", "A09", "A10"))
 names(brassica_traits$geno)
 
+summaryMap(brassica_traits)
+#         n.mar length ave.spacing max.spacing
+# 1          28   53.7         2.0        12.6
+# 2          32   93.1         3.0        18.7
+# 3          37  115.1         3.2        22.4
+# 4          15   66.7         4.8        19.4
+# 5          13   75.3         6.3        27.5
+# 6          28   92.0         3.4        31.7
+# 7          21   63.2         3.2        15.9
+# 8           8   35.8         5.1        16.7
+# 9          29   67.0         2.4         9.9
+# 10         14   56.5         4.3        16.4
+# overall   225  718.5         3.3        31.7
+
 ###########
-# New Map
+# old Map
 ###########
 setwd("/Users/Cody_2/git.repos/brassica_genetic_map/output")
 brassica_newmap <- read.cross("csvsr", genfile ="snp_map_rqtl_Mbp_ref1.5_cross_output_gen.csv", 
