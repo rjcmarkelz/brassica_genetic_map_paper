@@ -43,6 +43,7 @@ Possible reasons for the enrichment of larger scaffolds within the set of incorp
 High-density genetic map
 From the available SNP data we were able to create a genetic map with ten linkage groups corresponding to the 10 chromosomes of Brassica rapa ((Table [genetic-map-summary.png])). The map contains 1482 genotyped markers for 124 RILs and is completely saturated based on recombination events existing in the population. The maximum spacing between markers is 36.6 cM with an average spacing between markers of 0.7 cM (Table X), The overall map distance of 1045.6 cM. The new map is compared to the existing map containing 224 markers with an average spacing of 1.5 cM (@iniguez-luy_development_2009). Furthermore, the new marker set has physical anchors to the genome for each marker and includes newly placed scaffolds on chromosomes X, Y, Z.
 Conclusions
+
 #Figures
 
 Figure 1. Plot of merged data from all RILs genotyped using the parent-based SNP set. Each of the B. rapa ten chromosomes are displayed (A01-A10) with counts coverage of each SNP at each physical position on the chromosome in megabases (Mb). The color indicates the relative ratio of coverage between R500 and IMB211 for every SNP. Black is equal coverage, orange is more IMB211 and blue is more R500.
@@ -63,7 +64,7 @@ Figure 5. Asymmetric binary distance plots for each marker compared against ever
 
 Figure 6. Old and new genetic map comparisons. Genetic markers for each chromosome are displayed in centimorgan distance (cM) for the old (A) and new (B) genetic maps. Comparison of likelihood odds scores for flowering time QTL using the old (C) and new (D) genetic maps.
 
-Figure S2 Physical position versus genetic position of each marker for genome version 1.5 with spline fits for converting between genetic and physical distances.
+Figure S2. Physical position versus genetic position of each marker for genome version 1.5 with spline fits for converting between genetic and physical distances.
 
 The new genetic map improves QTL resolution using the same phenotypic data and simple QTL mapping method (Figure X). We had a hard time placing the old markers on the reference genome. We should show this...
 comparison of old and new.
