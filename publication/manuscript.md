@@ -43,22 +43,29 @@ Possible reasons for the enrichment of larger scaffolds within the set of incorp
 High-density genetic map
 From the available SNP data we were able to create a genetic map with ten linkage groups corresponding to the 10 chromosomes of Brassica rapa ((Table [genetic-map-summary.png])). The map contains 1482 genotyped markers for 124 RILs and is completely saturated based on recombination events existing in the population. The maximum spacing between markers is 36.6 cM with an average spacing between markers of 0.7 cM (Table X), The overall map distance of 1045.6 cM. The new map is compared to the existing map containing 224 markers with an average spacing of 1.5 cM (@iniguez-luy_development_2009). Furthermore, the new marker set has physical anchors to the genome for each marker and includes newly placed scaffolds on chromosomes X, Y, Z.
 Conclusions
-Figures
- >
-Figure [rils-merged.parent-based-snps.png]: Plot of merged data from all RILs genotyped using the parent-based SNP set. Each of the B. rapa ten chromosomes are displayed (A01-A10) with counts coverage of each SNP at each physical position on the chromosome in megabases (Mb). The color indicates the relative ratio of coverage between R500 and IMB211 for every SNP. Black is equal coverage, orange is more IMB211 and blue is more R500.
- >
-Figure [rils-merged.population-based-snps.png]: Plot of merged data from all RILs genotyped at population-based SNP set. Each of the B. rapa ten chromosomes are displayed (A01-A10) with counts coverage of each SNP at each physical position on the chromosome in megabases (Mb). The color indicates the relative ratio of coverage between R500 and IMB211 for every SNP. Black is equal coverage, orange is more IMB211 and blue is more R500.
- >
-Table [SNP-counts.png]: SNP counts at different steps of the SNP discovery pipeline. The percentage of SNPs located on chromosomes or scaffolds remaining after each step are shown in parentheses. The first percentage is relative to the initial set of SNPs and the second percentage is relative to the set of SNPs from the previous step.
- >
-Figure [scaffold-size-distributions.png]: Density distributions of scaffold sizes. Newly incorporated scaffolds are shown in green and unincorporated scaffolds are shown in gray.
- >
-Table [incorporated-scaffolds-stats.png]: Incorporated scaffolds represent a disproportionately high amount of scaffold sequence. Percentages of scaffold subset counts and total lengths relative to the set of all scaffolds are shown in parentheses.
- >  > Figure [SNPs-per-scaffold.png]: Number of SNPs per scaffold.
- >  > Figure [figures/genetic-map-qtl-figure.png]: Old and new genetic map comparisons. Genetic markers for each chromosome are displayed in centimorgan distance (cM) for the old (A) and new (B) genetic maps. Likelihood odds scores for flowering time QTL using the old (C) and new (D) genetic maps.
- >  > Figure [figures/genetic-map-recombination-fraction.pdf]: Pairwise recombination fractions (upper left triangle) and Likelihood Odds Scores (LOD; lower right triangle) of SNP markers across the 10 chromosomes of Brassica rapa. Color scale goes from red (greater association) to blue (no association).
- >  > Figure [figures/A10-genetic-vs-physical-v2-3.pdf]: Physical position versus genetic position of each marker for genome version 1.5 (A) and our improved scaffold/marker placement (B)
-Improved QTL results
+
+#Figures
+
+Figure 1. Plot of merged data from all RILs genotyped using the parent-based SNP set. Each of the B. rapa ten chromosomes are displayed (A01-A10) with counts coverage of each SNP at each physical position on the chromosome in megabases (Mb). The color indicates the relative ratio of coverage between R500 and IMB211 for every SNP. Black is equal coverage, orange is more IMB211 and blue is more R500.
+
+Figure 2. Plot of merged data from all RILs genotyped at population-based SNP set. Each of the B. rapa ten chromosomes are displayed (A01-A10) with counts coverage of each SNP at each physical position on the chromosome in megabases (Mb). The color indicates the relative ratio of coverage between R500 and IMB211 for every SNP. Black is equal coverage, orange is more IMB211 and blue is more R500.
+
+Table 1. SNP counts at different steps of the SNP discovery pipeline. The percentage of SNPs located on chromosomes or scaffolds remaining after each step are shown in parentheses. The first percentage is relative to the initial set of SNPs and the second percentage is relative to the set of SNPs from the previous step.
+
+Table 2. Incorporated scaffolds represent a disproportionately high amount of scaffold sequence. Percentages of scaffold subset counts and total lengths relative to the set of all scaffolds are shown in parentheses.
+
+Figure 3. (A) Number of SNPs per scaffold. (B) Density distributions of scaffold sizes. Newly incorporated scaffolds are shown in green and unincorporated scaffolds are shown in gray.
+
+Figure 4. Composite population genotype map with the position in physical distance across all ten chromosomes. Each RIL is represented as a single row displaying the genomic region inherited from IMB211 (Orange) or R500 (Blue). Small heterogeneous regions are represented in black. 
+
+Figure S1. Representative asymmetric binary distance analysis plot for a single marker located on A01. Markers with X% correlation are indicated in red. Misplaced markers are circled in blue. 
+
+Figure 5. Asymmetric binary distance plots for each marker compared against every other marker before (A) and after (B) marker rearrangement. Dark blue indicates high correlation while white indicates no genetic correlation. 
+
+Figure 6. Old and new genetic map comparisons. Genetic markers for each chromosome are displayed in centimorgan distance (cM) for the old (A) and new (B) genetic maps. Comparison of likelihood odds scores for flowering time QTL using the old (C) and new (D) genetic maps.
+
+Figure S2. Physical position versus genetic position of each marker for genome version 1.5 with spline fits for converting between genetic and physical distances.
+
 The new genetic map improves QTL resolution using the same phenotypic data and simple QTL mapping method (Figure X). We had a hard time placing the old markers on the reference genome. We should show this...
 comparison of old and new.
 Does the new map cover the whole known genome?
