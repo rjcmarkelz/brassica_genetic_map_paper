@@ -42,7 +42,7 @@ all_chr_plot
 setwd("/Users/Cody_2/git.repos/brassica_genetic_map_paper/output")
 v2.3_A01 <- subset(v2.3_map, chr == "A01")
 plot(v2.3_A01$pos, v2.3_A01$genomic_pos)
-
+v2.3_A01
 head(v2.3_A01)
 str(v2.3_A01)
 # A01
@@ -56,7 +56,7 @@ ggsave("A01_genetic_vs_physical_v2.3.pdf")
 # A02
 v2.3_A02 <- subset(v2.3_map, chr == "A02")
 plot(v2.3_A02$pos, v2.3_A02$genomic_pos)
-
+v2.3_A02
 head(v2.3_A02)
 str(v2.3_A02)
 
@@ -84,7 +84,7 @@ ggsave("A03_genetic_vs_physical_v2.3.pdf")
 # A04
 v2.3_A04 <- subset(v2.3_map, chr == "A04")
 plot(v2.3_A04$pos, v2.3_A04$genomic_pos)
-
+v2.3_A04
 head(v2.3_A04)
 str(v2.3_A04)
 
@@ -98,7 +98,7 @@ ggsave("A04_genetic_vs_physical_v2.3.pdf")
 # A05
 v2.3_A05 <- subset(v2.3_map, chr == "A05")
 plot(v2.3_A05$pos, v2.3_A05$genomic_pos)
-
+v2.3_A05
 head(v2.3_A05)
 str(v2.3_A05)
 
@@ -112,7 +112,7 @@ ggsave("A05_genetic_vs_physical_v2.3.pdf")
 # A06
 v2.3_A06 <- subset(v2.3_map, chr == "A06")
 plot(v2.3_A06$pos, v2.3_A06$genomic_pos)
-
+v2.3_A06
 head(v2.3_A06)
 str(v2.3_A06)
 
@@ -126,7 +126,7 @@ ggsave("A06_genetic_vs_physical_v2.3.pdf")
 # A07
 v2.3_A07 <- subset(v2.3_map, chr == "A07")
 plot(v2.3_A07$pos, v2.3_A07$genomic_pos)
-
+v2.3_A07
 head(v2.3_A07)
 str(v2.3_A07)
 
@@ -140,7 +140,7 @@ ggsave("A07_genetic_vs_physical_v2.3.pdf")
 # A08
 v2.3_A08 <- subset(v2.3_map, chr == "A08")
 plot(v2.3_A08$pos, v2.3_A08$genomic_pos)
-
+v2.3_A08
 head(v2.3_A08)
 str(v2.3_A08)
 
@@ -154,7 +154,7 @@ ggsave("A08_genetic_vs_physical_v2.3.pdf")
 # A09
 v2.3_A09 <- subset(v2.3_map, chr == "A09")
 plot(v2.3_A09$pos, v2.3_A09$genomic_pos)
-
+v2.3_A09
 head(v2.3_A09)
 str(v2.3_A09)
 
@@ -168,7 +168,7 @@ ggsave("A09_genetic_vs_physical_v2.3.pdf")
 # A10
 v2.3_A10 <- subset(v2.3_map, chr == "A10")
 plot(v2.3_A10$pos, v2.3_A10$genomic_pos)
-
+v2.3_A10
 head(v2.3_A10)
 str(v2.3_A10)
 
@@ -182,11 +182,12 @@ ggsave("A10_genetic_vs_physical_v2.3.pdf")
 # splines
 # head(v2.3_A03)
 # ?smooth.spline
-# A03_smooth <- smooth.spline(v2.3_A03$pos, v2.3_A03$genomic_pos)
-# plot(A03_smooth)
+A03_smooth <- smooth.spline(v2.3_A03$pos, v2.3_A03$genomic_pos)
+plot(A03_smooth)
 plot(v2.3_A03$pos ~ v2.3_A03$genomic_pos)
 lines(predict(A03_smooth ), col='red', lwd=2)
-
+A03_smooth_pred <- predict(A03_smooth)
+A03_smooth_pred
 lines(A03_smooth, col = "blue")
 lines(smooth.spline(v2.3_A03$pos, v2.3_A03$genomic_pos, df = 1), lty = 2, col = "red")
 str(A03_smooth)
