@@ -53,6 +53,19 @@ A01_plot <- A01_plot + xlab("Genetic Position (cM)") + ylab("Physical Position (
 A01_plot
 ggsave("A01_genetic_vs_physical_v2.3.pdf")
 
+# 130-133 marker numbers
+scaffoldMarker <- function(cord1, cord2, mnum){
+    inc <- (cord2 - cord1)/mnum
+    for(i in seq(cord1, (cord2 - inc), inc)){
+        output <- list(i + inc)
+    }
+    return(output)
+}
+
+A01_vec1[130:133] <- as.numeric(scaffoldMarker(A01_vec1[129], A01_vec1[134], 4))
+as.numeric(scaffoldMarker(A01_vec1[129], A01_vec1[134], 4))
+str(scaffoldMarker(A01_vec1[129], A01_vec1[134], 4))
+
 # A02
 v2.3_A02 <- subset(v2.3_map, chr == "A02")
 plot(v2.3_A02$pos, v2.3_A02$genomic_pos)
@@ -222,4 +235,7 @@ predict(cars.lo, data.frame(speed = seq(5, 30, 1)), se = TRUE)
 # A03_plot <- A03_plot + geom_smooth(method = "loess")
 # A03_plot
 # ggsave("A10_genetic_vs_physical_v2.3.pdf")
+
+
+
 #end
