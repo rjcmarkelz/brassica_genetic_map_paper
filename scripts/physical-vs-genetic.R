@@ -54,17 +54,19 @@ A01_plot
 ggsave("A01_genetic_vs_physical_v2.3.pdf")
 
 # 130-133 marker numbers
+A01_vec1 <- v2.3_A01$genomic_pos
+
 scaffoldMarker <- function(cord1, cord2, mnum){
-    inc <- (cord2 - cord1)/mnum
-    for(i in seq(cord1, (cord2 - inc), inc)){
-        output <- list(i + inc)
-    }
+    inc <- (cord2 - cord1)/(mnum+1)
+    output <- seq((cord1 + inc), (cord2 - inc), inc)
     return(output)
 }
 
 A01_vec1[130:133] <- as.numeric(scaffoldMarker(A01_vec1[129], A01_vec1[134], 4))
-as.numeric(scaffoldMarker(A01_vec1[129], A01_vec1[134], 4))
-str(scaffoldMarker(A01_vec1[129], A01_vec1[134], 4))
+A01_vec1[158:160] <- as.numeric(scaffoldMarker(A01_vec1[157], A01_vec1[161], 3))
+A01_vec1
+v2.3_A01$genomic_new <- A01_vec1
+v2.3_A01
 
 # A02
 v2.3_A02 <- subset(v2.3_map, chr == "A02")
