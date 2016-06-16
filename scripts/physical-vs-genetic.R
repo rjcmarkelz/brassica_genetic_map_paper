@@ -213,20 +213,25 @@ v2.3_A09
 head(v2.3_A09)
 str(v2.3_A09)
 
-A08_vec1 <- v2.3_A08$genomic_pos
-A08_vec1
+A09_vec1 <- v2.3_A09$genomic_pos
+A09_vec1
+plot(A09_vec1)
 
-A08_vec1[62:63] <- as.numeric(scaffoldMarker(A08_vec1[61], A08_vec1[64], 2))
-
-v2.3_A08$genomic_new <- A08_vec1
-v2.3_A08
-
-v2.3_A08$genomic_new <- as.numeric(v2.3_A08$genomic_new)
-A08_plot <- ggplot(v2.3_A08, aes(x=pos, y=genomic_new)) 
-A08_plot <- A08_plot + geom_point(shape=1) + facet_grid(chr ~ . ) 
-A08_plot <- A08_plot + xlab("Genetic Position (cM)") + ylab("Physical Position (Mbp)")
-A08_plot
-ggsave("A08_genetic_vs_physical_v2.3.pdf")
+A09_vec1[26:27] <- as.numeric(scaffoldMarker(A09_vec1[25], A09_vec1[28], 2))
+A09_vec1[46] <- as.numeric(scaffoldMarker(A09_vec1[45], A09_vec1[47], 1))
+A09_vec1
+#reverse 39:55
+A09_vec1[39:55] <- rev(A09_vec1[39:55])
+plot(A09_vec1)
+v2.3_A09$genomic_new <- A09_vec1
+v2.3_A09
+A09_vec1
+v2.3_A09$genomic_new <- as.numeric(v2.3_A09$genomic_new)
+A09_plot <- ggplot(v2.3_A09, aes(x=pos, y=genomic_new)) 
+A09_plot <- A09_plot + geom_point(shape=1) + facet_grid(chr ~ . ) 
+A09_plot <- A09_plot + xlab("Genetic Position (cM)") + ylab("Physical Position (Mbp)")
+A09_plot
+ggsave("A09_genetic_vs_physical_v2.3.pdf")
 
 # A10
 v2.3_A10 <- subset(v2.3_map, chr == "A10")
@@ -235,8 +240,17 @@ v2.3_A10
 head(v2.3_A10)
 str(v2.3_A10)
 
-v2.3_A10$genomic_pos <- as.numeric(v2.3_A10$genomic_pos)
-A10_plot <- ggplot(v2.3_A10, aes(x=pos, y=genomic_pos)) 
+A10_vec1 <- v2.3_A10$genomic_pos
+A10_vec1
+plot(A10_vec1)
+#reverse 39:55
+A10_vec1[1:38] <- rev(A10_vec1[1:38])
+plot(A10_vec1)
+v2.3_A10$genomic_new <- A10_vec1
+v2.3_A10
+A10_vec1
+v2.3_A10$genomic_new <- as.numeric(v2.3_A10$genomic_new)
+A10_plot <- ggplot(v2.3_A10, aes(x=pos, y=genomic_new)) 
 A10_plot <- A10_plot + geom_point(shape=1) + facet_grid(chr ~ . ) 
 A10_plot <- A10_plot + xlab("Genetic Position (cM)") + ylab("Physical Position (Mbp)")
 A10_plot
