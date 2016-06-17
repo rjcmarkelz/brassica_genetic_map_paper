@@ -269,7 +269,7 @@ lines(A03_smooth, col = "blue")
 lines(smooth.spline(v2.3_A03$pos, v2.3_A03$genomic_pos, df = 1), lty = 2, col = "red")
 str(A03_smooth)
 
-plot(A03_smooth$fit$coef)# end
+plot(A03_smooth$fit$coef) # end
 ?lines
 out <- plot.formula(A03_smooth)
 out
@@ -290,6 +290,7 @@ lines(A03_smooth, col='red', lwd=2)
 str(A03_smooth)
 cars.lo <- loess(dist ~ speed, cars)
 predict(cars.lo, data.frame(speed = seq(5, 30, 1)), se = TRUE)
+
 # A03_smooth <- loess(v2.3_A03$pos, v2.3_A03$genomic_pos)
 # v2.3_A03$smooth <- predict(A03_smooth)
 # v2.3_A03$genomic_pos <- as.numeric(v2.3_A03$genomic_pos)
