@@ -1,1 +1,2 @@
 #Abstract (250 words)
+Here we describe high-density SNP discovery and genetic map construction for a Brassica rapa recombinant inbred line population. We also use the genotype data from the population to detect and remedy putative genome mis-assemblies and to assign scaffold sequences to their likely genomic locations. These improvements to the assembly represent 7.1-8.0% of the annotated Brassica rapa genome. We demonstrate how this new resource is a significant improvement for QTL analysis over the current low-density genetic map.
