@@ -6,7 +6,7 @@ library(qtl)
 library(ggplot2)
 library(cowplot)
 
-setwd("/Users/Cody_2/git.repos/brassica_genetic_map_paper/input")
+setwd("/Users/rjcmarkelz1/git.repos/brassica_genetic_map_paper/input")
 brassica_traits <- read.cross("csvsr", genfile ="old_map_rqtl.csv", 
 	                       phefile="Brock_2010_pheno.csv", genotypes=c("0","2"))
 head(brassica_traits)
@@ -46,9 +46,9 @@ summaryMap(brassica_traits)
 # overall   225  718.5         3.3        31.7
 
 ###########
-# old Map
+# new Map
 ###########
-setwd("/Users/Cody_2/git.repos/brassica_genetic_map/output")
+setwd("/Users/rjcmarkelz1/git.repos/brassica_genetic_map/output")
 brassica_newmap <- read.cross("csvsr", genfile ="snp_map_rqtl_Mbp_ref1.5_cross_output_gen.csv", 
                            phefile="snp_map_rqtl_Mbp_ref1.5_cross_output_phe.csv", 
                            genotypes=c("AA","BB"), 
@@ -113,6 +113,64 @@ ggsave("new_genetic_map.pdf", new_map_plot)
 # plot flowering
 #############
 #############
+
+######################################
+#####CIM##############################
+######################################
+old_flr_cim_perm <- cim(brassica_traits, pheno.col = 2, n.marcovar = 3, n.perm = 1000)
+old_flr_cim_perm_95 <- summary(old_flr_cim_perm)[1] #keep 95%
+summary(old_flr_cim_perm)
+# LOD thresholds (1000 permutations)
+#     [,1]
+# 5%  3.59
+# 10% 3.17
+
+old_flr_cim <- cim(brassica_traits, pheno.col = 2, n.marcovar = 3)
+plot(old_flr_cim)
+plot(old_flr_cim, chr = "A10")
+head(old_flr_cim)
+old_flr_cim_A10 <- subset(old_flr_cim, chr = "A10")
+
+peak2 <- 9
+oldplot_flr <- ggplot(old_flr_cim_A10)
+oldplot_flr <- oldplot_flr +  theme_bw() + scale_y_continuous(limits=c(0, 13)) + 
+                        geom_line(aes(x = pos, y = lod), size = 2) +
+                        geom_hline(yintercept = 3.59, color = "red", size = 1) +
+                        geom_segment(aes(x = pos, xend = pos), y = (peak2 * -0.02), yend = (peak2 * -0.05)) +
+                        theme(text = element_text(size = 20)) +
+                        xlab("Genetic Distance (cM)") +
+                        ylab("LOD Score") 
+oldplot_flr
+
+new_flr_cim_perm <- cim(brassica_newmap, pheno.col = 2, n.marcovar = 3, n.perm = 1000)
+new_flr_cim_perm_95 <- summary(new_flr_cim_perm)[1] #keep 95%
+summary(new_flr_cim_perm)
+# LOD thresholds (1000 permutations)
+#     [,1]
+# 5%  3.94
+# 10% 3.51
+
+new_flr_cim <- cim(brassica_newmap, pheno.col = 2, n.marcovar = 3)
+plot(new_flr_cim, chr = "A10")
+head(new_flr_cim)
+
+new_flr_cim_A10 <- subset(new_flr_cim, chr = "A10")
+
+peak2 <- 9
+newplot_flr <- ggplot(new_flr_cim_A10)
+newplot_flr <- newplot_flr +  theme_bw() + scale_y_continuous(limits=c(0, 13)) + 
+                        geom_line(aes(x = pos, y = lod), size = 2) +
+                        geom_hline(yintercept = 3.94, color = "red", size = 1) +
+                        geom_segment(aes(x = pos, xend = pos), y = (peak2 * -0.02), yend = (peak2 * -0.05)) +
+                        theme(text = element_text(size = 20)) +
+                        xlab("Genetic Distance (cM)") +
+                        ylab("LOD Score") 
+newplot_flr
+
+
+######################################
+#########SCANONE#############
+######################################
 old_flr_perm <- scanone(brassica_traits, pheno.col = 2, method = "imp", n.perm = 10000)
 old_flr_perm_95 <- summary(old_flr_perm)[1] #keep 95%
 summary(old_flr_perm)
@@ -132,7 +190,6 @@ oldplot_flr <- oldplot_flr +  theme_bw() + scale_y_continuous(limits=c(0, 13)) +
                         xlab("Genetic Distance (cM)") +
                         ylab("LOD Score") 
 oldplot_flr
-
 
 # new map
 new_flr_perm <- scanone(brassica_newmap, pheno.col = 2, method = "imp", n.perm = 10000)
@@ -157,7 +214,7 @@ newplot_flr <- newplot_flr +  theme_bw() + scale_y_continuous(limits=c(0, 13)) +
 newplot_flr
 
 
-setwd("/Users/Cody_2/git.repos/brassica_genetic_map_paper/output")
+setwd("/Users/rjcmarkelz1/git.repos/brassica_genetic_map_paper/output")
 figure_X <- plot_grid(old_map_plot, new_map_plot, oldplot_flr, newplot_flr, labels=c("A", "B", "C", "D"))
 figure_X
 ?ggsave
@@ -184,6 +241,7 @@ ggsave("genetic_map_qtl_figure.pdf", figure_X, height = 10, width = 15)
 #############
 oldleaf <- scanone(brassica_traits, pheno.col = 1, method = "imp")
 plot(oldleaf)
+
 
 peak <- 7
 oldmapplotleaf <- ggplot(oldleaf)
@@ -219,12 +277,13 @@ newplot_leaf <- newplot_leaf +  theme_bw() + scale_y_continuous(limits=c(0, 7.5)
 newplot_leaf
 ggsave("leaf_length_figure.pdf", newplot_map, height = 10, width = 15)
 
-leaf_cim <- cim(brassica_newmap, pheno.col = 1)
+leaf_cim <- cim(brassica_newmap, pheno.col = 2)
 leaf_cim
 plot(leaf_cim)
 plot(leaf_cim, chr = "A06")
 plot(leaf_cim, chr = "A10")
 
+pull.pheno(brassica_newmap)
 
 flr_cim <- cim(brassica_newmap, pheno.col = 2)
 flr_cim
