@@ -4,15 +4,15 @@
 library(qtl)
 library(plyr)
 library(ggplot2)
-setwd("/Users/Cody_2/git.repos/brassica_genetic_map_paper/output")
-b_map_red <- read.cross("csvsr", genfile ="snp_map_rqtl_Mbp_ref1.5_cross_output_gen.csv", 
-	                       phefile="snp_map_rqtl_Mbp_ref1.5_cross_output_phe.csv", 
+setwd("/Users/rjcmarkelz1/git.repos/brassica_genetic_map_paper/output")
+b_map_red <- read.cross("csvsr", genfile ="snp_map_rqtl_Mbp_ref1.5.3_cross_output_gen.csv", 
+	                       phefile="snp_map_rqtl_Mbp_ref1.5.3_cross_output_phe.csv", 
 	                       genotypes=c("AA","BB"), 
 	                       na.strings=c("NA","-"))
 class(b_map_red)[1] <- "riself"
 b_map_red <- jittermap(b_map_red)
 b_map_red
-
+summaryMap(b_map_red)
 #reformat for plotting in ggplot
 v2.3_map <- pull.map(b_map_red, as.table=TRUE)
 v2.3_map
@@ -62,7 +62,7 @@ v2.3_A01
 
 v2.3_A01$genomic_new <- as.numeric(v2.3_A01$genomic_new)
 A01_plot <- ggplot(v2.3_A01, aes(x=pos, y=genomic_new)) 
-A01_plot <- A01_plot + geom_point(shape=1) + facet_grid(chr ~ . ) 
+A01_plot <- A01_plot + geom_point(shape=1) + facet_grid(chr ~ . ) + geom_smooth(method = "loess", span = 0.1)
 A01_plot <- A01_plot + xlab("Genetic Position (cM)") + ylab("Physical Position (Mbp)")
 A01_plot
 ggsave("A01_genetic_vs_physical_v2.3_fixed.pdf")
@@ -82,7 +82,7 @@ v2.3_A02
 
 v2.3_A02$genomic_new <- as.numeric(v2.3_A02$genomic_new)
 A02_plot <- ggplot(v2.3_A02, aes(x=pos, y=genomic_new)) 
-A02_plot <- A02_plot + geom_point(shape=1) + facet_grid(chr ~ . ) 
+A02_plot <- A02_plot + geom_point(shape=1) + facet_grid(chr ~ . ) + geom_smooth(method = "loess", span = 0.1)
 A02_plot <- A02_plot + xlab("Genetic Position (cM)") + ylab("Physical Position (Mbp)")
 A02_plot
 ggsave("A02_genetic_vs_physical_v2.3.pdf")
@@ -96,7 +96,7 @@ str(v2.3_A03)
 
 v2.3_A03$genomic_pos <- as.numeric(v2.3_A03$genomic_pos)
 A03_plot <- ggplot(v2.3_A03, aes(x=pos, y=genomic_pos)) 
-A03_plot <- A03_plot + geom_point(shape=1) + facet_grid(chr ~ . ) 
+A03_plot <- A03_plot + geom_point(shape=1) + facet_grid(chr ~ . ) + geom_smooth(method = "loess", span = 0.1)
 A03_plot <- A03_plot + xlab("Genetic Position (cM)") + ylab("Physical Position (Mbp)")
 A03_plot
 ggsave("A03_genetic_vs_physical_v2.3.pdf")
@@ -116,7 +116,7 @@ v2.3_A04
 
 v2.3_A04$genomic_new <- as.numeric(v2.3_A04$genomic_new)
 A04_plot <- ggplot(v2.3_A04, aes(x=pos, y=genomic_new)) 
-A04_plot <- A04_plot + geom_point(shape=1) + facet_grid(chr ~ . ) 
+A04_plot <- A04_plot + geom_point(shape=1) + facet_grid(chr ~ . ) + geom_smooth(method = "loess", span = 0.1)
 A04_plot <- A04_plot + xlab("Genetic Position (cM)") + ylab("Physical Position (Mbp)")
 A04_plot
 ggsave("A04_genetic_vs_physical_v2.3.pdf")
@@ -137,7 +137,7 @@ v2.3_A05
 
 v2.3_A05$genomic_new <- as.numeric(v2.3_A05$genomic_new)
 A05_plot <- ggplot(v2.3_A05, aes(x=pos, y=genomic_new)) 
-A05_plot <- A05_plot + geom_point(shape=1) + facet_grid(chr ~ . ) 
+A05_plot <- A05_plot + geom_point(shape=1) + facet_grid(chr ~ . ) + geom_smooth(method = "loess", span = 0.1)
 A05_plot <- A05_plot + xlab("Genetic Position (cM)") + ylab("Physical Position (Mbp)")
 A05_plot
 ggsave("A05_genetic_vs_physical_v2.3.pdf")
@@ -158,7 +158,7 @@ v2.3_A06
 
 v2.3_A06$genomic_new <- as.numeric(v2.3_A06$genomic_new)
 A06_plot <- ggplot(v2.3_A06, aes(x=pos, y=genomic_new)) 
-A06_plot <- A06_plot + geom_point(shape=1) + facet_grid(chr ~ . ) 
+A06_plot <- A06_plot + geom_point(shape=1) + facet_grid(chr ~ . ) + geom_smooth(method = "loess", span = 0.1)
 A06_plot <- A06_plot + xlab("Genetic Position (cM)") + ylab("Physical Position (Mbp)")
 A06_plot
 ggsave("A06_genetic_vs_physical_v2.3.pdf")
@@ -179,7 +179,7 @@ v2.3_A07
 
 v2.3_A07$genomic_new <- as.numeric(v2.3_A07$genomic_new)
 A07_plot <- ggplot(v2.3_A07, aes(x=pos, y=genomic_new)) 
-A07_plot <- A07_plot + geom_point(shape=1) + facet_grid(chr ~ . ) 
+A07_plot <- A07_plot + geom_point(shape=1) + facet_grid(chr ~ . ) + geom_smooth(method = "loess", span = 0.1)
 A07_plot <- A07_plot + xlab("Genetic Position (cM)") + ylab("Physical Position (Mbp)")
 A07_plot
 ggsave("A07_genetic_vs_physical_v2.3.pdf")
@@ -201,7 +201,7 @@ v2.3_A08
 
 v2.3_A08$genomic_new <- as.numeric(v2.3_A08$genomic_new)
 A08_plot <- ggplot(v2.3_A08, aes(x=pos, y=genomic_new)) 
-A08_plot <- A08_plot + geom_point(shape=1) + facet_grid(chr ~ . ) 
+A08_plot <- A08_plot + geom_point(shape=1) + facet_grid(chr ~ . ) + geom_smooth(method = "loess", span = 0.1)
 A08_plot <- A08_plot + xlab("Genetic Position (cM)") + ylab("Physical Position (Mbp)")
 A08_plot
 ggsave("A08_genetic_vs_physical_v2.3.pdf")
@@ -226,10 +226,19 @@ plot(A09_vec1)
 v2.3_A09$genomic_new <- A09_vec1
 v2.3_A09
 A09_vec1
+
+A09_plot_old <- ggplot(v2.3_A09, aes(x=pos, y=genomic_pos)) 
+A09_plot_old <- A09_plot_old + geom_point(shape=1) + facet_grid(chr ~ . ) 
+A09_plot_old <- A09_plot_old + xlab("Genetic Position (cM)") + ylab("Physical Position (Mbp)")
+A09_plot_old <- A09_plot_old + theme(text = element_text(size=20))
+A09_plot_old 
+ggsave("A09_genetic_vs_physical_v2.3_old.pdf")
+
 v2.3_A09$genomic_new <- as.numeric(v2.3_A09$genomic_new)
 A09_plot <- ggplot(v2.3_A09, aes(x=pos, y=genomic_new)) 
-A09_plot <- A09_plot + geom_point(shape=1) + facet_grid(chr ~ . ) 
+A09_plot <- A09_plot + geom_point(shape=1) + facet_grid(chr ~ . ) + geom_smooth(method = "loess", span = 0.1)
 A09_plot <- A09_plot + xlab("Genetic Position (cM)") + ylab("Physical Position (Mbp)")
+A09_plot <- A09_plot + theme(text = element_text(size=20))
 A09_plot
 ggsave("A09_genetic_vs_physical_v2.3.pdf")
 
@@ -250,46 +259,38 @@ v2.3_A10$genomic_new <- A10_vec1
 v2.3_A10
 A10_vec1
 v2.3_A10$genomic_new <- as.numeric(v2.3_A10$genomic_new)
+A10_smooth <- loess(v2.3_A10$pos ~ v2.3_A10$genomic_new)
+v2.3_A10$smooth <- predict(A10_smooth)
+plot(v2.3_A10$smooth)
+
+A10_plot_old <- ggplot(v2.3_A10, aes(x=pos, y=genomic_pos)) 
+A10_plot_old <- A10_plot_old + geom_point(shape=1) + facet_grid(chr ~ . ) 
+A10_plot_old <- A10_plot_old + xlab("Genetic Position (cM)") + ylab("Physical Position (Mbp)")
+A10_plot_old <- A10_plot_old + theme(text = element_text(size=20))
+A10_plot_old
+ggsave("A10_genetic_vs_physical_v2.3_old.pdf")
+
 A10_plot <- ggplot(v2.3_A10, aes(x=pos, y=genomic_new)) 
-A10_plot <- A10_plot + geom_point(shape=1) + facet_grid(chr ~ . ) 
+A10_plot <- A10_plot + geom_point(shape=1) + facet_grid(chr ~ . ) + geom_smooth(method = "loess", span = 0.1)
 A10_plot <- A10_plot + xlab("Genetic Position (cM)") + ylab("Physical Position (Mbp)")
+A10_plot <- A10_plot + theme(text = element_text(size=20))
 A10_plot
 ggsave("A10_genetic_vs_physical_v2.3.pdf")
 
 # splines
-# head(v2.3_A03)
-# ?smooth.spline
-A03_smooth <- smooth.spline(v2.3_A03$pos, v2.3_A03$genomic_pos)
+?stat_smooth
+A03_smooth <- loess(v2.3_A03$pos ~ v2.3_A03$genomic_pos)
+v2.3_A03$smooth <- predict(A03_smooth)
+plot(v2.3_A03$smooth)
+
 plot(A03_smooth)
-plot(v2.3_A03$pos ~ v2.3_A03$genomic_pos)
-lines(predict(A03_smooth ), col='red', lwd=2)
-A03_smooth_pred <- predict(A03_smooth)
-A03_smooth_pred
-lines(A03_smooth, col = "blue")
-lines(smooth.spline(v2.3_A03$pos, v2.3_A03$genomic_pos, df = 1), lty = 2, col = "red")
 str(A03_smooth)
-
-plot(A03_smooth$fit$coef) # end
-?lines
-out <- plot.formula(A03_smooth)
-out
-
-x <- 1:10
-y <- c(2,4,6,8,7,12,14,16,18,20)
-lo <- loess(y~x)
-plot(x,y)
-lines(predict(lo), col='red', lwd=2)
-predict(lo)
-lo
-?geom_smooth
-?loess
-A03_smooth <- smooth.spline(v2.3_A03$pos ~ v2.3_A03$genomic_pos)
 plot(v2.3_A03$pos, v2.3_A03$genomic_pos)
-lines(A03_smooth, col='red', lwd=2)
+lines(predict(A03_smooth), col='red', lwd=2)
 
-str(A03_smooth)
-cars.lo <- loess(dist ~ speed, cars)
-predict(cars.lo, data.frame(speed = seq(5, 30, 1)), se = TRUE)
+
+
+
 
 # A03_smooth <- loess(v2.3_A03$pos, v2.3_A03$genomic_pos)
 # v2.3_A03$smooth <- predict(A03_smooth)
