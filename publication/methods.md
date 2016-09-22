@@ -1,33 +1,21 @@
-#Materials and Methods
+# Methods
+## RNA-seq library preparation and sequencing
+RNA-Seq libraries were prepared using high-throughput Illumina RNA-Seq library extraction protocol (Kumar et al., 2012). The enriched libraries were then quantified on an Analyst Plate Reader (LJL Biosystems) using SYBR Green I reagent (Invitrogen). Once the concentration of libraries was determined, a single pool of all the RNA-Seq libraries with in each block was made and then run on Bioanalyzer (Agilent, SantaClara) to determine the product size of the final pool. Finally each pool is adjusted to a final concentration of 20 nM and sequenced on 7 lanes on Illumina Hi-Seq 2000 flowcell as 50-bp single end reads. All the failed samples from all 5 blocks were run on 2 additional lanes.
 
-###Genetic Map Construction
+## RNA-Seq Read Processing
+Pre-processing and mapping of Illumina RNA-Seq raw reads was done as described earlier (Devisetty et al., 2014) with one exception. The raw reads were quality filtered with fastq_quality_filter with parameters [-q 20, -p 95]. The qualified de-multiplexed reads were then mapped to B. rapa reference genome (Chiifu version 1.5) using BWA v0.6.1-r104 (Li and Durbin, 2009) with parameters [bwa_n 0.04] and the unmapped reads are in turn mapped with TopHat with parameters [splice-mismatches 1, max-multihits 1, segment-length 22, butterfly-search,, max-intron-length 5000, library-type fr-unstranded].
 
-Using one unique SNP per genotype bin, we created a saturated genetic map.
+## Genotyping 
+Individuals in the population were genotyped first using the reference set of sSNPs that were called as part of Devissetty et al. 2014 pipeline. However, once merging all the outputs for the RILs there were inconsistencies suggesting that the parents of the population had more then one parent. The R500 SNPs were consistent across all the individuals whereas the IMB211 SNPs were not suggesting that the parental seed stock has cross pollination contamination. There was not any evidence that the R500 seed stock was contaminated. This led us to approach this using an alternative genotyping strategy by combining all the individual replicates per RIL into a single file to call SNPs compared to the reference genome. Each SNP was then filtered by comparing it to the genotype of the R500 parent. At each SNP, each RIL was genotyped as R500 or the alternate allele. All these SNPs needed to match up with the one another. At each step there were quality scores and filters that were applied using custom Perl scripts (found here). Only SNPs that met our quality scores were considered. 
 
-The genetic map was constructed using the chromosomal position of each of the SNPs as a starting point for marker ordering along the chromosomes.
+## Genotypic Bin Creation 
+All of the SNPs were then assembled along the chromosomes according to their genomic location. Aligning all the individuals in the population allowed us to calculate unique recombinations that are present in the population. These unique bins were determined by custom Perl scripts (found here). SNPs located in the middle of the genotypic bin were selected to be used for placement of scaffolds and the creation of the genetic map. 
 
-The genetic map construction was done using the R statistical environment with the R/QTL package (Broman et al. XXXX, Broman genetic map paper, Supplemental Data X).
+## Genetic Map Construction
+Using one unique SNP per genotype bin, we created a saturated genetic map. The genetic map was constructed using the chromosomal position of each of the SNPs as a starting point for marker ordering along the chromosomes. Each chromosome was treated as a large linkage group and each SNP was tested for linkage disequilibrium with all other SNPs with the R/QTL package (Broman et al. XXXX, Supplemental Data X) in the R statistical environment (@R-ref). The larger gaps in the map is where there is little marker information and corresponded to centromeric regions (Figure X b). These large gaps caused a small problem when ordering the markers and connecting each of the chromosomal arms in the correct order. In these ordering chromosomes X, Y, Z we used the physical position of the SNPs to connect the two arms in the correct order. The orientation of the scaffolds cannot be determined with the current methods because of we are limited by the size of the population. Therefore, scaffolds are placed between adjacent bins determined by lowest recombination probabilities.
 
-In brief, each chromosome was treated as a large linkage group and each SNP was tested for linkage disequilibrium with all other SNPs to find and move misplaced markers.
-
-The larger gaps in the map are where we had little marker information and corresponded to centromeric regions.
-
-These large gaps caused a small problem when ordering the markers and connecting each of the chromosomal arms in the correct order.
-
-On chromosomes X, Y, Z we used the physical position of the SNPs to connect the two arms in the correct order. 
-
-###QTL Mapping
-
-To demonstrate an improvement in coverage in mapping physiological traits, we remapped three traits from Brock et al. 2010 that used the old genetic map without physical positions of the markers.
-
-This was performed using the scanone() function in RQTL with 10,000 permutations to determine the significance cutoff (see Supplemental Data X.)
-
-Comparisons of the old vs. new map were visualized using ggplot2 (Wickham XXXX).
-
-
-
-
-
+## QTL Comparisons
+To demonstrate an improvement in coverage in mapping physiological traits, we remapped two traits from @brock_floral_2010 that used the existing genetic map. As the fairest comparisons between maps, marker regression was performed using the scanone() function in RQTL with 10,000 permutations to determine the significance cutoff (Figure X).
 
 
 
